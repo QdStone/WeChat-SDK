@@ -28,6 +28,7 @@ public class MediaServiceTest {
     static File video = new File(MediaServiceTest.class.getResource("/media/1.mp4").getFile());
 
     static String imageMediaId;
+    static String materialMediaId;
 
     static MediaService service = ServiceHelper.get(client, /*"http://weimob.tunnel.qydev.com/"*/null, MediaService.class);
 
@@ -84,6 +85,8 @@ public class MediaServiceTest {
         param.setNews(news);
         AddNewsResult result1 = service.addNews(TestConstants.accessToken, param);
         System.out.println(result1);
+        Assert.assertEquals(Integer.valueOf(0), result1.getErrorCode());
+        materialMediaId = result1.getMediaId();
     }
 
     @Test
@@ -100,7 +103,7 @@ public class MediaServiceTest {
 
     @Test
     public void test_getMaterial() {
-        GetMaterialResult result = GetMaterialResult.from(service.getMaterial(TestConstants.accessToken, new MediaIdHolder("")));
+        GetMaterialResult result = GetMaterialResult.from(service.getMaterial(TestConstants.accessToken, new MediaIdHolder(materialMediaId)));
         System.out.println(result);
     }
 }
