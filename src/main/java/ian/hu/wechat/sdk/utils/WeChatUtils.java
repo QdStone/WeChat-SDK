@@ -72,8 +72,11 @@ public class WeChatUtils {
     public static String getSHA1ForMessage(String text, String token, String nonce, Long timestamp) {
         String[] strings = new String[]{text, token, nonce, String.valueOf(timestamp)};
         Arrays.sort(strings);
-        String combineStr = String.join("", strings);
-        return DigestUtils.shaHex(combineStr);
+        StringBuilder sb = new StringBuilder();
+        for (String s : strings) {
+            sb.append(s);
+        }
+        return DigestUtils.shaHex(sb.toString());
     }
 
     /**
