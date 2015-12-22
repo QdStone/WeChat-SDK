@@ -12,7 +12,7 @@ public class ResultHelper {
         T result;
         try {
             result = clazz.newInstance();
-        } catch (ReflectiveOperationException e) {
+        } catch (Exception e) {
             throw new RuntimeException(String.format("%s need a public constructor without parameter", clazz.getSimpleName()), e);
         }
         MediaType from = result.fromMediaType();

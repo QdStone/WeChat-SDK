@@ -24,8 +24,11 @@ import java.util.ArrayList;
  */
 public class MediaServiceTest {
     static ResteasyClient client = new ResteasyClientBuilder().disableTrustManager().build();
-    static File file = new File("/Users/ian/Downloads/20151102190133_19017.jpeg");
-    static File video = new File("/Users/ian/Downloads/395.mp4");
+    static File file = new File(MediaServiceTest.class.getResource("/media/IMAG0047.jpg").getFile());
+    static File video = new File(MediaServiceTest.class.getResource("/media/1.mp4").getFile());
+
+    static String imageMediaId;
+
     static MediaService service = ServiceHelper.get(client, /*"http://weimob.tunnel.qydev.com/"*/null, MediaService.class);
 
     @BeforeClass
@@ -36,12 +39,15 @@ public class MediaServiceTest {
     @Test
     public void test_create2() {
         MultipartFormDataOutput output = MediaHelper.fromFile(file, null);
-        System.out.println(service.create(TestConstants.accessToken, "image", output));
+        CreateResult result = service.create(TestConstants.accessToken, "image", output);
+        System.out.println(result);
+        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
+        imageMediaId = result.getMedia().getMediaId();
     }
 
     @Test
     public void test_get() {
-        Response response = service.get(TestConstants.accessToken, "");
+        Response response = service.get(TestConstants.accessToken, imageMediaId);
         System.out.println(GetResult.from(response));
     }
 
