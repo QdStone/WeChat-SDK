@@ -1,10 +1,12 @@
 package ian.hu.wechat.sdk.service.media.result;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ian.hu.wechat.sdk.service.core.result.Result;
 
 import java.util.ArrayList;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PageResult extends Result {
     @JsonProperty("total_count")
     private Integer totalCount;
