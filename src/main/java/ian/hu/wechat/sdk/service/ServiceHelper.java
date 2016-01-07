@@ -32,7 +32,7 @@ public class ServiceHelper {
             client = ClientBuilder.newClient();
         }
         client.register(MediaTypeInterceptor.class);
-        if (LogFactory.getLog(LoggingFilter.class).isDebugEnabled()) {
+        if (LogFactory.getLog(clazz).isDebugEnabled()) {
             client.register(LoggingFilter.class);
         }
 
