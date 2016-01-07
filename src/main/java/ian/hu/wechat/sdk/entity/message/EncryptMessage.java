@@ -10,7 +10,7 @@ public interface EncryptMessage extends Serializable {
      * 解密
      *
      * @param args 解密参数
-     * @return 解密失败反悔null
+     * @return 解密失败返回null
      */
     RawMessage toRaw(String... args);
 

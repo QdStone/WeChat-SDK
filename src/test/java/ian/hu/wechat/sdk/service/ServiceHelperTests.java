@@ -29,6 +29,6 @@ public class ServiceHelperTests {
         AccessTokenService service = ServiceHelper.get(AccessTokenService.class);
         AccessTokenResult result = service.get(TestConstants.appId, TestConstants.appSecret, AccessTokenService.GRANT_TYPE_CLIENT_CREDENTIAL);
         System.out.println(result);
-        Assert.assertNull(result.getErrorCode());
+        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
     }
 }

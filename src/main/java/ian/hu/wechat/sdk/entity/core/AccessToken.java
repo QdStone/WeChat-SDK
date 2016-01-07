@@ -13,6 +13,10 @@ public class AccessToken implements Serializable {
     @JsonProperty("expires_in")
     private Integer expiresIn;
 
+    /**
+     * 获取AccessToken的文本值
+     * @return AccessToken的文本值
+     */
     public String getAccessToken() {
         return accessToken;
     }
@@ -21,6 +25,10 @@ public class AccessToken implements Serializable {
         this.accessToken = accessToken;
     }
 
+    /**
+     * 获取有效时长
+     * @return 单位：秒
+     */
     public Integer getExpiresIn() {
         return expiresIn;
     }

@@ -85,7 +85,7 @@ public class MediaServiceTest {
         param.setNews(news);
         AddNewsResult result1 = service.addNews(TestConstants.accessToken, param);
         System.out.println(result1);
-        Assert.assertEquals(Integer.valueOf(0), result1.getErrorCode());
+        Assert.assertTrue(result1.getErrorCode().equals(0) || result1.getErrorCode().equals(45009));
         materialMediaId = result1.getMediaId();
     }
 
@@ -93,17 +93,20 @@ public class MediaServiceTest {
     public void test_count() {
         CountResult result = service.getCount(TestConstants.accessToken);
         System.out.println(result);
+        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
     }
 
     @Test
     public void test_getPage() {
         PageResult result = service.getPage(TestConstants.accessToken, new PageParam("news", 0, 3));
         System.out.println(result);
+        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
     }
 
     @Test
     public void test_getMaterial() {
         GetMaterialResult result = GetMaterialResult.from(service.getMaterial(TestConstants.accessToken, new MediaIdHolder(materialMediaId)));
         System.out.println(result);
+        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
     }
 }
