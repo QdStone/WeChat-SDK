@@ -31,23 +31,28 @@ public class LoggingFilter implements ContainerRequestFilter, ClientRequestFilte
 
     private static final Log logger = LogFactory.getLog(LoggingFilter.class);
 
+    @Override
     public void filter(ClientRequestContext context) throws IOException {
         logger.info(String.format("URI: %s", context.getUri().toString()));
         logHttpHeaders(context.getStringHeaders(), "Request");
     }
 
+    @Override
     public void filter(ClientRequestContext requestContext, ClientResponseContext responseContext) throws IOException {
         logHttpHeaders(responseContext.getHeaders(), "Response");
     }
 
+    @Override
     public void filter(ContainerRequestContext context) throws IOException {
         logHttpHeaders(context.getHeaders(), "Request");
     }
 
+    @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
         logHttpHeaders(responseContext.getStringHeaders(), "Response");
     }
 
+    @Override
     public Object aroundReadFrom(ReaderInterceptorContext context) throws IOException, WebApplicationException {
         byte[] buffer = IOUtils.toByteArray(context.getInputStream());
         if (buffer.length < 3096) {
@@ -60,6 +65,7 @@ public class LoggingFilter implements ContainerRequestFilter, ClientRequestFilte
         return context.proceed();
     }
 
+    @Override
     public void aroundWriteTo(WriterInterceptorContext context) throws IOException, WebApplicationException {
         OutputStreamWrapper wrapper = new OutputStreamWrapper(context.getOutputStream());
         context.setOutputStream(wrapper);
