@@ -3,12 +3,13 @@ package ian.hu.wechat.sdk.entity.menu.button;
 import ian.hu.wechat.sdk.entity.menu.Menu;
 
 /**
- * Created by ian on 15/12/12.
+ * 选择系统照片
  */
 public class PicSysPhoto extends Click {
 
+    private static final long serialVersionUID = 500637750169218955L;
+
     public PicSysPhoto() {
-        super();
     }
 
     public PicSysPhoto(String name, String key) {
@@ -17,6 +18,6 @@ public class PicSysPhoto extends Click {
 
     @Override
     public String defaultType() {
-        return type = Menu.TYPE_PIC_SYSPHOTO;
+        return Menu.TYPE_PIC_SYSPHOTO;
     }
 }

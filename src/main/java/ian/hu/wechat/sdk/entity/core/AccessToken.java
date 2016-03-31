@@ -1,47 +1,32 @@
 package ian.hu.wechat.sdk.entity.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 /**
  * AccessToken
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccessToken implements Serializable {
+    private static final long serialVersionUID = -5354404996063607521L;
+
+    /**
+     * access_token
+     */
     @JsonProperty("access_token")
     private String accessToken;
+
+    /**
+     * expires_in 单位：秒
+     */
     @JsonProperty("expires_in")
     private Integer expiresIn;
-
-    /**
-     * 获取AccessToken的文本值
-     * @return AccessToken的文本值
-     */
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    /**
-     * 获取有效时长
-     * @return 单位：秒
-     */
-    public Integer getExpiresIn() {
-        return expiresIn;
-    }
-
-    public void setExpiresIn(Integer expiresIn) {
-        this.expiresIn = expiresIn;
-    }
-
-    @Override
-    public String toString() {
-        return "AccessToken{" +
-                "accessToken='" + accessToken + '\'' +
-                ", expiresIn=" + expiresIn +
-                '}';
-    }
 }

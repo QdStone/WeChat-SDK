@@ -3,9 +3,11 @@ package ian.hu.wechat.sdk.entity.menu.button;
 import ian.hu.wechat.sdk.entity.menu.Menu;
 
 /**
- * Created by ian on 15/12/12.
+ * 扫码推送事件
  */
 public class ScanPush extends Click {
+
+    private static final long serialVersionUID = 5874588727044574626L;
 
     public ScanPush() {
         super();

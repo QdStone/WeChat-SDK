@@ -3,10 +3,11 @@ package ian.hu.wechat.sdk.service.media;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 
-import javax.activation.MimetypesFileTypeMap;
+import javax.activation.FileTypeMap;
 import javax.ws.rs.core.MediaType;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 素材工具类
@@ -14,6 +15,9 @@ import java.util.HashMap;
 public class MediaHelper {
 
     private static final String MAGIC_STRING = "fw_____";
+
+    private MediaHelper() {
+    }
 
     /**
      * 创建用于上传素材的数据结构
@@ -27,7 +31,7 @@ public class MediaHelper {
             key = "media";
         }
         MultipartFormDataOutput output = new MultipartFormDataOutput();
-        output.addFormData(key, file, MediaType.valueOf(MimetypesFileTypeMap.getDefaultFileTypeMap().getContentType(file)), file.getName());
+        output.addFormData(key, file, MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(file)), file.getName());
         // fuck weixin 如果没有下面这行，微信会报media data is missing
         //output.addFormData(MAGIC_STRING, StringUtils.reverse(MAGIC_STRING), MediaType.TEXT_PLAIN_TYPE);
         return output;
@@ -43,7 +47,7 @@ public class MediaHelper {
      * @return 已添加描述的 {@link MultipartFormDataOutput}
      */
     public static MultipartFormDataOutput addVideoDescription(MultipartFormDataOutput output, String title, String introduction) {
-        HashMap<String, String> description = new HashMap<String, String>();
+        Map<String, String> description = new HashMap<String, String>();
         description.put("title", title);
         description.put("introduction", introduction);
         output.addFormData("description", description, HashMap.class, TypeFactory.defaultInstance().constructMapType(HashMap.class, String.class, String.class), MediaType.APPLICATION_JSON_TYPE);

@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import ian.hu.wechat.sdk.entity.menu.Menu;
 
 /**
- * Created by ian on 15/12/12.
+ * 打开链接
  */
 public class View extends Button {
 
+    private static final long serialVersionUID = -4564228043958260200L;
     @JsonProperty("url")
     protected String url;
 
@@ -31,7 +32,7 @@ public class View extends Button {
 
     @Override
     public String defaultType() {
-        return Menu.TYPE_VIEW.toLowerCase();
+        return Menu.TYPE_VIEW;
     }
 
     @Override

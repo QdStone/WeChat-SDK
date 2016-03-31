@@ -1,8 +1,8 @@
 package ian.hu.wechat.sdk.service.menu.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ian.hu.wechat.sdk.service.core.result.Result;
 import ian.hu.wechat.sdk.entity.menu.Menu;
+import ian.hu.wechat.sdk.service.core.result.Result;
 
 /**
  * 获取菜单的返回结果

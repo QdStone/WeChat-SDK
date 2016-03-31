@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ViewLimited extends Button {
 
+    private static final long serialVersionUID = 5225646528702063546L;
     /**
      * 图文素材的media_id
      */

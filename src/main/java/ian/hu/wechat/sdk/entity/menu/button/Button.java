@@ -3,11 +3,13 @@ package ian.hu.wechat.sdk.entity.menu.button;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Created by ian on 15/12/12.
+ * 带type的按钮
  */
 public abstract class Button extends AbstractButton {
 
-    public Button() {
+    private static final long serialVersionUID = 2916012291360524910L;
+
+    protected Button() {
         type = defaultType();
     }
 

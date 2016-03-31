@@ -1,9 +1,9 @@
 package ian.hu.wechat.sdk.service.media.result;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import ian.hu.wechat.sdk.service.core.result.Result;
 import ian.hu.wechat.sdk.entity.media.Media;
 import ian.hu.wechat.sdk.rest.annotation.OverrideMediaType;
+import ian.hu.wechat.sdk.service.core.result.Result;
 
 import javax.ws.rs.core.MediaType;
 

@@ -4,20 +4,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import ian.hu.wechat.sdk.entity.menu.Menu;
 
 /**
- * Created by ian on 15/12/12.
+ * 点击拉取信息
  */
 public class Click extends Button {
 
+    private static final long serialVersionUID = -6116631433572736144L;
     @JsonProperty("key")
     protected String key;
 
     public Click() {
-        super();
     }
 
     public Click(String name, String key) {
         this();
-        this.setName(name);
+        setName(name);
         this.key = key;
     }
 
@@ -31,15 +31,6 @@ public class Click extends Button {
 
     @Override
     public String defaultType() {
-        return Menu.TYPE_CLICK.toLowerCase();
-    }
-
-    @Override
-    public String toString() {
-        return "Click{" +
-                "type=" + type +
-                ",name=" + getName() +
-                ",key='" + key + '\'' +
-                '}';
+        return Menu.TYPE_CLICK;
     }
 }

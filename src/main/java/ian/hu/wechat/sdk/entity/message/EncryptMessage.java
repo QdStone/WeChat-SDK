@@ -17,7 +17,7 @@ public interface EncryptMessage extends Serializable {
     /**
      * 加密
      *
-     * @param message
+     * @param message 原始消息
      * @param args    加密参数
      * @return 加密失败返回null
      */

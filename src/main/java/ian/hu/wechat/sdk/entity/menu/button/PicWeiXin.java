@@ -3,9 +3,11 @@ package ian.hu.wechat.sdk.entity.menu.button;
 import ian.hu.wechat.sdk.entity.menu.Menu;
 
 /**
- * Created by ian on 15/12/12.
+ * 选择微笑那图片
  */
 public class PicWeiXin extends Click {
+    private static final long serialVersionUID = 1475160432426205607L;
+
     public PicWeiXin() {
         super();
     }
@@ -16,6 +18,6 @@ public class PicWeiXin extends Click {
 
     @Override
     public String defaultType() {
-        return type = Menu.TYPE_PIC_WEIXIN;
+        return Menu.TYPE_PIC_WEIXIN;
     }
 }

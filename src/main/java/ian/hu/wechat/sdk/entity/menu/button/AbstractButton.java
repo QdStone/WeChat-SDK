@@ -9,9 +9,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by ian on 15/12/12.
+ * 抽象的菜单按钮
  */
 public abstract class AbstractButton implements Serializable {
+
+    private static final long serialVersionUID = -6432583450368104661L;
 
     @JsonProperty("name")
     private String name;
@@ -24,6 +26,18 @@ public abstract class AbstractButton implements Serializable {
         this.name = name;
     }
 
+    /**
+     * 用于给JSON反序列化构建
+     *
+     * @param name       菜单名称
+     * @param key        菜单key值
+     * @param url        菜单url
+     * @param type       菜单类型
+     * @param mediaId    如果是view_limited，则为其media_id
+     * @param subButtons 子菜单，如果有
+     * @return 菜单按钮
+     * @throws JsonMappingException
+     */
     @JsonCreator
     public static AbstractButton createAbstractButton(@JsonProperty("name") String name, @JsonProperty("key") String key, @JsonProperty("url") String url, @JsonProperty("type") String type, @JsonProperty("media_id") String mediaId, @JsonProperty("sub_button") ArrayList<AbstractButton> subButtons) throws JsonMappingException {
         if (Menu.TYPE_CLICK.equals(type)) {

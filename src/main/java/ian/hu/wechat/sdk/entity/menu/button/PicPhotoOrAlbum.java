@@ -3,11 +3,12 @@ package ian.hu.wechat.sdk.entity.menu.button;
 import ian.hu.wechat.sdk.entity.menu.Menu;
 
 /**
- * Created by ian on 15/12/12.
+ * 拍照或选择相片
  */
 public class PicPhotoOrAlbum extends Click {
+    private static final long serialVersionUID = -1386046795516963014L;
+
     public PicPhotoOrAlbum() {
-        super();
     }
 
     public PicPhotoOrAlbum(String name, String key) {
@@ -16,6 +17,6 @@ public class PicPhotoOrAlbum extends Click {
 
     @Override
     public String defaultType() {
-        return type = Menu.TYPE_PIC_PHOTO_OR_ALBUM;
+        return Menu.TYPE_PIC_PHOTO_OR_ALBUM;
     }
 }

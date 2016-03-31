@@ -1,9 +1,11 @@
 package ian.hu.wechat.sdk.entity.menu.button;
 
 /**
- * Created by ian on 15/12/12.
+ * 限制图文
  */
 public class MediaId extends ViewLimited {
+    private static final long serialVersionUID = -3502527872728404305L;
+
     public MediaId() {
         super();
     }

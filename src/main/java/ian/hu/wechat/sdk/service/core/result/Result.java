@@ -8,6 +8,7 @@ import java.io.Serializable;
  * 接口调用返回
  */
 public class Result implements Serializable {
+    private static final long serialVersionUID = -8572159414269679601L;
     @JsonProperty("errcode")
     private Integer errorCode;
     @JsonProperty("errmsg")

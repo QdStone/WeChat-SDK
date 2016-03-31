@@ -1,32 +1,32 @@
 package ian.hu.wechat.sdk.service.core.result;
 
-import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 响应结果代码
  */
-public enum Errors implements Serializable {
+public enum Errors {
     /**
      * 调用成功
      */
     OK(0, "OK"),
-    SystemBusy(-1, "系统繁忙，此时请开发者稍候再试/功能未启用"),
-    SystemError(-2, "程序内部错误"),
-    InvalidToken(40001, "获取access_token时AppSecret错误，或者access_token无效。请开发者认真比对AppSecret的正确性，或查看是否正在为恰当的公众号调用接口"),
-    InvalidCredential(40002, "不合法的凭证类型"),
-    InvalidOpenId(40003, "不合法的OpenID，请开发者确认OpenID（该用户）是否已关注公众号，或是否是其他公众号的OpenID"),
-    InvalidMediaType(40004, "不合法的媒体文件类型"),
-    InvalidFileType(40005, "不合法的文件类型"),
-    InvalidFileSize(40006, "不合法的文件大小"),
-    InvalidMediaFileId(40007, "不合法的媒体文件id"),
-    InvalidMessageType(40008, "不合法的消息类型"),
-    InvalidImageFileSize(40009, "不合法的图片文件大小"),
-    InvalidVoiceFileSize(40010, "不合法的语音文件大小");
+    SYSTEM_BUSY(-1, "系统繁忙，此时请开发者稍候再试/功能未启用"),
+    SYSTEM_ERROR(-2, "程序内部错误"),
+    INVALID_TOKEN(40001, "获取access_token时AppSecret错误，或者access_token无效。请开发者认真比对AppSecret的正确性，或查看是否正在为恰当的公众号调用接口"),
+    INVALID_CREDENTIAL(40002, "不合法的凭证类型"),
+    INVALID_OPEN_ID(40003, "不合法的OpenID，请开发者确认OpenID（该用户）是否已关注公众号，或是否是其他公众号的OpenID"),
+    INVALID_MEDIA_TYPE(40004, "不合法的媒体文件类型"),
+    INVALID_FILE_TYPE(40005, "不合法的文件类型"),
+    INVALID_FILE_SIZE(40006, "不合法的文件大小"),
+    INVALID_MEDIA_FILE_ID(40007, "不合法的媒体文件id"),
+    INVALID_MESSAGE_TYPE(40008, "不合法的消息类型"),
+    INVALID_IMAGE_FILE_SIZE(40009, "不合法的图片文件大小"),
+    INVALID_VOICE_FILE_SIZE(40010, "不合法的语音文件大小");
 
-    private String msg;
-    private long code;
-    static private HashMap<Long, Errors> errors = new HashMap<Long, Errors>();
+    private static final Map<Long, Errors> ERRORS_MAP = new HashMap<Long, Errors>();
+    private final String msg;
+    private final long code;
 
     Errors(long code, String msg) {
         this.code = code;
@@ -37,22 +37,17 @@ public enum Errors implements Serializable {
         return msg;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
     public long getCode() {
         return code;
     }
 
-
     public static Errors get(long code) {
-        if (errors.isEmpty()) {
+        if (ERRORS_MAP.isEmpty()) {
             for (Errors e : Errors.values()) {
-                errors.put(e.getCode(), e);
+                ERRORS_MAP.put(e.getCode(), e);
             }
         }
-        return errors.get(code);
+        return ERRORS_MAP.get(code);
     }
 
 }

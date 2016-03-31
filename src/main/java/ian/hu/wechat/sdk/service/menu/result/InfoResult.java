@@ -2,10 +2,10 @@ package ian.hu.wechat.sdk.service.menu.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import ian.hu.wechat.sdk.service.core.result.Result;
 import ian.hu.wechat.sdk.entity.menu.Menu;
 import ian.hu.wechat.sdk.entity.menu.button.AbstractButton;
 import ian.hu.wechat.sdk.entity.menu.button.SubButton;
+import ian.hu.wechat.sdk.service.core.result.Result;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

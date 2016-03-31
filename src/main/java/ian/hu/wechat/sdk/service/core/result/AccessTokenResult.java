@@ -7,6 +7,7 @@ import ian.hu.wechat.sdk.entity.core.AccessToken;
  * 获取AccessToken的结果
  */
 public class AccessTokenResult extends Result {
+    private static final long serialVersionUID = -1840549668432357528L;
     @JsonUnwrapped
     private AccessToken accessToken;
 

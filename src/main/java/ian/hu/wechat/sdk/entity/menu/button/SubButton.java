@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 
 /**
- * Created by ian on 15/12/12.
+ * 子菜单
  */
 public class SubButton extends AbstractButton {
 
+    private static final long serialVersionUID = 6910110003783707954L;
     @JsonProperty("sub_button")
     protected ArrayList<AbstractButton> subButtons = new ArrayList<AbstractButton>();
 

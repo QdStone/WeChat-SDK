@@ -1,13 +1,23 @@
 package ian.hu.wechat.sdk.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 /**
  * 用户信息
  */
+@Data
+@Builder
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserInfo implements Serializable {
+    private static final long serialVersionUID = -2990741543163967485L;
     @JsonProperty("suscribe")
     private Integer subscribe;
     @JsonProperty("openid")
@@ -43,127 +53,4 @@ public class UserInfo implements Serializable {
     private String remark;
     @JsonProperty("groupid")
     private Integer groupId;
-
-    public Integer getSubscribe() {
-        return subscribe;
-    }
-
-    public void setSubscribe(Integer subscribe) {
-        this.subscribe = subscribe;
-    }
-
-    public String getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getHeadImgUrl() {
-        return headImgUrl;
-    }
-
-    public void setHeadImgUrl(String headImgUrl) {
-        this.headImgUrl = headImgUrl;
-    }
-
-    public Long getSubscribeTime() {
-        return subscribeTime;
-    }
-
-    public void setSubscribeTime(Long subscribeTime) {
-        this.subscribeTime = subscribeTime;
-    }
-
-    public String getUnionId() {
-        return unionId;
-    }
-
-    public void setUnionId(String unionId) {
-        this.unionId = unionId;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Integer getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
-    }
-
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "subscribe=" + subscribe +
-                ", openId='" + openId + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", sex=" + sex +
-                ", language='" + language + '\'' +
-                ", city='" + city + '\'' +
-                ", province='" + province + '\'' +
-                ", country='" + country + '\'' +
-                ", headImgUrl='" + headImgUrl + '\'' +
-                ", subscribeTime=" + subscribeTime +
-                ", unionId='" + unionId + '\'' +
-                ", remark='" + remark + '\'' +
-                ", groupId=" + groupId +
-                '}';
-    }
 }

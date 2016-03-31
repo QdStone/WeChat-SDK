@@ -1,5 +1,10 @@
 package ian.hu.wechat.sdk.entity.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,6 +13,8 @@ import java.util.Collections;
 /**
  * 对微信的原始回复
  */
+@Data
+
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.NONE)
 public class RawResponse implements Serializable {
@@ -18,19 +25,27 @@ public class RawResponse implements Serializable {
     public static final String TYPE_VIDEO = "video";
     public static final String TYPE_MUSIC = "music";
     public static final String TYPE_NEWS = "news";
+    private static final long serialVersionUID = 1127462516748673430L;
 
-    private boolean stop = false;
+    private boolean stop;
 
     @XmlElement(name = "ToUserName")
     private String toUserName;
     @XmlElement(name = "FromUserName")
     private String fromUserName;
+    @SuppressWarnings("FieldMayBeFinal")
     @XmlElement(name = "CreateTime")
     private Long createTime = System.currentTimeMillis();
 
+    /**
+     * 消息类型
+     */
     @XmlElement(name = "MsgType")
     private String msgType;
 
+    /**
+     * text:文本内容
+     */
     @XmlElement(name = "Content")
     private String content;
 
@@ -66,93 +81,6 @@ public class RawResponse implements Serializable {
         return Boolean.TRUE;
     }
 
-    public String getToUserName() {
-        return toUserName;
-    }
-
-    public void setToUserName(String toUserName) {
-        this.toUserName = toUserName;
-    }
-
-    public String getFromUserName() {
-        return fromUserName;
-    }
-
-    public void setFromUserName(String fromUserName) {
-        this.fromUserName = fromUserName;
-    }
-
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * 消息类型
-     */
-    public String getMsgType() {
-        return msgType;
-    }
-
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
-    }
-
-    /**
-     * text:文本内容
-     */
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public MediaIdHolder getImage() {
-        return image;
-    }
-
-    public void setImage(MediaIdHolder image) {
-        this.image = image;
-    }
-
-    public MediaIdHolder getVoice() {
-        return voice;
-    }
-
-    public void setVoice(MediaIdHolder voice) {
-        this.voice = voice;
-    }
-
-    public Video getVideo() {
-        return video;
-    }
-
-    public void setVideo(Video video) {
-        this.video = video;
-    }
-
-    public Music getMusic() {
-        return music;
-    }
-
-    public void setMusic(Music music) {
-        this.music = music;
-    }
-
-    public ArrayList<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(ArrayList<Article> articles) {
-        this.articles = articles;
-    }
-
-
     public static boolean isStop(RawResponse response) {
         return response != null && response.stop;
     }
@@ -161,78 +89,41 @@ public class RawResponse implements Serializable {
         return response == null || Builder.NO_RESPONSE.equals(response);
     }
 
+    @Data
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @lombok.Builder
     @XmlAccessorType(XmlAccessType.NONE)
     public static class MediaIdHolder implements Serializable {
+        private static final long serialVersionUID = -8769121318036495411L;
         @XmlElement(name = "MediaId")
         private String mediaId;
-
-        public MediaIdHolder() {
-        }
-
-        public MediaIdHolder(String mediaId) {
-            this.setMediaId(mediaId);
-        }
-
-        @Override
-        public String toString() {
-            return "MediaIdHolder{" +
-                    "mediaId='" + getMediaId() + '\'' +
-                    '}';
-        }
-
-        public String getMediaId() {
-            return mediaId;
-        }
-
-        public void setMediaId(String mediaId) {
-            this.mediaId = mediaId;
-        }
     }
 
+    @Data
+
+    @lombok.Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @EqualsAndHashCode(callSuper = true)
     @XmlAccessorType(XmlAccessType.NONE)
     public static class Video extends MediaIdHolder {
+        private static final long serialVersionUID = 3591760585510187834L;
         @XmlElement(name = "Title")
         private String title;
         @XmlElement(name = "Description")
         private String description;
-
-        public Video() {
-        }
-
-        public Video(String mediaId, String title, String description) {
-            this.setMediaId(mediaId);
-            this.setTitle(title);
-            this.setDescription(description);
-        }
-
-        @Override
-        public String toString() {
-            return "Video{" +
-                    "mediaId='" + getMediaId() + '\'' +
-                    ", title='" + getTitle() + '\'' +
-                    ", description='" + getDescription() + '\'' +
-                    '}';
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
     }
 
+    @Data
+
+    @lombok.Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     @XmlAccessorType(XmlAccessType.NONE)
     public static class Music implements Serializable {
+        private static final long serialVersionUID = 4844265006661582146L;
         @XmlElement(name = "Title")
         private String title;
         @XmlElement(name = "Description")
@@ -244,71 +135,16 @@ public class RawResponse implements Serializable {
         @XmlElement(name = "ThumbMediaId")
         private String thumbMediaId;
 
-        public Music() {
-        }
-
-        public Music(String title, String description, String musicUrl, String musicUrlHQ, String thumbMediaId) {
-            this.setTitle(title);
-            this.setDescription(description);
-            this.setMusicUrl(musicUrl);
-            this.setMusicUrlHQ(musicUrlHQ);
-            this.setThumbMediaId(thumbMediaId);
-        }
-
-        @Override
-        public String toString() {
-            return "Music{" +
-                    "title='" + getTitle() + '\'' +
-                    ", description='" + getDescription() + '\'' +
-                    ", musicUrl='" + getMusicUrl() + '\'' +
-                    ", musicUrlHQ='" + getMusicUrlHQ() + '\'' +
-                    ", thumbMediaId='" + getThumbMediaId() + '\'' +
-                    '}';
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public String getMusicUrl() {
-            return musicUrl;
-        }
-
-        public void setMusicUrl(String musicUrl) {
-            this.musicUrl = musicUrl;
-        }
-
-        public String getMusicUrlHQ() {
-            return musicUrlHQ;
-        }
-
-        public void setMusicUrlHQ(String musicUrlHQ) {
-            this.musicUrlHQ = musicUrlHQ;
-        }
-
-        public String getThumbMediaId() {
-            return thumbMediaId;
-        }
-
-        public void setThumbMediaId(String thumbMediaId) {
-            this.thumbMediaId = thumbMediaId;
-        }
     }
 
+    @Data
+    @lombok.Builder
+
+    @NoArgsConstructor
+    @AllArgsConstructor
     @XmlAccessorType(XmlAccessType.NONE)
     public static class Article implements Serializable {
+        private static final long serialVersionUID = 8452528763717866381L;
         @XmlElement(name = "Title")
         private String title;
         @XmlElement(name = "Description")
@@ -317,58 +153,6 @@ public class RawResponse implements Serializable {
         private String picUrl;
         @XmlElement(name = "Url")
         private String url;
-
-        public Article() {
-        }
-
-        public Article(String title, String description, String picUrl, String url) {
-            this.setTitle(title);
-            this.setDescription(description);
-            this.setPicUrl(picUrl);
-            this.setUrl(url);
-        }
-
-        @Override
-        public String toString() {
-            return "Article{" +
-                    "title='" + getTitle() + '\'' +
-                    ", description='" + getDescription() + '\'' +
-                    ", picUrl='" + getPicUrl() + '\'' +
-                    ", url='" + getUrl() + '\'' +
-                    '}';
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public String getPicUrl() {
-            return picUrl;
-        }
-
-        public void setPicUrl(String picUrl) {
-            this.picUrl = picUrl;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
     }
 
 
@@ -468,7 +252,9 @@ public class RawResponse implements Serializable {
 
         public Builder setVideo(String mediaId, String title, String description) {
             ensure(TYPE_VIDEO);
-            response.setVideo(new Video(mediaId, title, description));
+            Video v = new Video(title, description);
+            v.setMediaId(mediaId);
+            response.setVideo(v);
             return this;
         }
 
@@ -529,22 +315,6 @@ public class RawResponse implements Serializable {
                     "response=" + response +
                     '}';
         }
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "toUserName='" + getToUserName() + '\'' +
-                ", fromUserName='" + getFromUserName() + '\'' +
-                ", createTime=" + getCreateTime() +
-                ", msgType='" + getMsgType() + '\'' +
-                ", content='" + getContent() + '\'' +
-                ", image=" + getImage() +
-                ", voice=" + getVoice() +
-                ", video=" + getVideo() +
-                ", music=" + getMusic() +
-                ", articles=" + getArticles() +
-                '}';
     }
 }
 

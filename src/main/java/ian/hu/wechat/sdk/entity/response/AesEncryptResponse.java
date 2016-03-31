@@ -1,8 +1,8 @@
 package ian.hu.wechat.sdk.entity.response;
 
+import ian.hu.wechat.sdk.entity.message.AesEncryptMessage;
 import ian.hu.wechat.sdk.utils.MashallerUtils;
 import ian.hu.wechat.sdk.utils.WeChatUtils;
-import ian.hu.wechat.sdk.entity.message.AesEncryptMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
