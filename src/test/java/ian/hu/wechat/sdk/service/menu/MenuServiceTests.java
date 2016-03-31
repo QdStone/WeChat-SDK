@@ -20,7 +20,7 @@ public class MenuServiceTests {
 
     @Test
     public void test_getMenu() {
-        MenuService service = ServiceHelper.get(MenuService.class);
+        MenuService service = ServiceHelper.getService(MenuService.class);
         GetResult result = service.get(TestConstants.accessToken);
         System.out.println(result);
         Assert.assertTrue(result.getErrorCode().equals(0));

@@ -3,31 +3,15 @@ package ian.hu.wechat.sdk.service.media.result;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import ian.hu.wechat.sdk.entity.media.MediaCount;
 import ian.hu.wechat.sdk.service.core.result.Result;
+import lombok.*;
 
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class CountResult extends Result {
+    private static final long serialVersionUID = 3973137835057125082L;
     @JsonUnwrapped
     private MediaCount mediaCount;
-
-    public MediaCount getMediaCount() {
-        return mediaCount;
-    }
-
-    public void setMediaCount(MediaCount mediaCount) {
-        this.mediaCount = mediaCount;
-    }
-
-    @Override
-    public Integer getErrorCode() {
-        return super.getErrorCode() == null ? 0 : super.getErrorCode();
-    }
-
-    @Override
-    public String toString() {
-        return "CountResult{" +
-                "mediaCount=" + mediaCount +
-                ", errorCode=" + getErrorCode() +
-                ", errorMsg=" + getErrorMessage() +
-                '}';
-    }
 }

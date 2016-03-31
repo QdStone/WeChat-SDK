@@ -24,24 +24,24 @@ public interface MediaService extends Service {
     /**
      * 图片素材
      */
-    public static final String TYPE_IMAGE = "image";
+    String TYPE_IMAGE = "image";
     /**
      * 语音素材
      */
-    public static final String TYPE_VOICE = "voice";
+    String TYPE_VOICE = "voice";
     /**
      * 视频素材
      */
-    public static final String TYPE_VIDEO = "video";
+    String TYPE_VIDEO = "video";
     /**
      * 缩略图素材
      */
-    public static final String TYPE_THUMB = "thumb";
+    String TYPE_THUMB = "thumb";
 
     /**
      * 微信api地址
      */
-    public static final String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
+    String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
 
 
     /**
@@ -50,7 +50,7 @@ public interface MediaService extends Service {
      * @param accessToken access token
      * @param type        素材类型
      * @param output      素材数据，使用 {@link MediaHelper#fromFile(File, String)} 来获得
-     * @return
+     * @return CreateResult
      */
     @POST
     @Path("media/upload")
@@ -63,17 +63,17 @@ public interface MediaService extends Service {
      *
      * @param accessToken accessToken
      * @param mediaId     素材id
-     * @return 返回结果，使用 {@link ian.hu.wechat.sdk.service.media.result.GetResult#from(Response)} 来读取
+     * @return 返回结果，使用 {@link GetResult#from(Response)} 来读取
      */
     @GET
-    @Path("media/get")
+    @Path("media/getService")
     @Produces(MediaType.WILDCARD)
     Response get(@QueryParam("access_token") String accessToken, @QueryParam("media_id") String mediaId);
 
     /**
      * 上传图文中的图片
      *
-     * @param accessToken
+     * @param accessToken access_token
      * @param output      素材数据，使用 {@link MediaHelper#fromFile(File, String)} 来获得
      * @return 上传结果
      */
@@ -85,9 +85,9 @@ public interface MediaService extends Service {
     /**
      * 添加图文素材
      *
-     * @param accessToken
-     * @param param
-     * @return
+     * @param accessToken access_token
+     * @param param param
+     * @return result
      */
     @POST
     @Path("material/add_news")
@@ -102,7 +102,7 @@ public interface MediaService extends Service {
      * <li>素材的格式大小等要求与公众平台官网一致。具体是，图片大小不超过2M，支持bmp/png/jpeg/jpg/gif格式，语音大小不超过5M，长度不超过60秒，支持mp3/wma/wav/amr格式</li>
      * <li>调用该接口需https协议</li></ol>
      *
-     * @param accessToken
+     * @param accessToken access_token
      * @param type        {@link #TYPE_IMAGE},{@link #TYPE_VOICE},{@link #TYPE_VIDEO},{@link #TYPE_THUMB}
      * @param output      使用{@link MediaHelper#fromFile(File, String)},{@link MediaHelper#addVideoDescription(MultipartFormDataOutput, String, String)}来构造
      * @return 添加结果
@@ -115,9 +115,9 @@ public interface MediaService extends Service {
     /**
      * 获取永久素材
      *
-     * @param accessToken
-     * @param param
-     * @return 返回结果，使用 {@link ian.hu.wechat.sdk.service.media.result.GetMaterialResult#from(Response)} 来读取
+     * @param accessToken access_token
+     * @param param param
+     * @return 返回结果，使用 {@link GetMaterialResult#from(Response)} 来读取
      */
     @POST
     @Path("material/get_material")

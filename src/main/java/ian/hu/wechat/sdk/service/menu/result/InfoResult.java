@@ -6,18 +6,24 @@ import ian.hu.wechat.sdk.entity.menu.Menu;
 import ian.hu.wechat.sdk.entity.menu.button.AbstractButton;
 import ian.hu.wechat.sdk.entity.menu.button.SubButton;
 import ian.hu.wechat.sdk.service.core.result.Result;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.*;
+import lombok.extern.apachecommons.CommonsLog;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 查询菜单信息的返回结果
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@CommonsLog
 public class InfoResult extends Result {
 
-    private static final Log logger = LogFactory.getLog(InfoResult.class);
+    private static final long serialVersionUID = -1716371176898911069L;
 
     @JsonProperty("is_menu_open")
     protected Integer open;
@@ -27,22 +33,6 @@ public class InfoResult extends Result {
     @Override
     public Integer getErrorCode() {
         return open != null ? 0 : super.getErrorCode();
-    }
-
-    public Integer getOpen() {
-        return open;
-    }
-
-    public void setOpen(Integer open) {
-        this.open = open;
-    }
-
-    public MenuInfo getInfo() {
-        return info;
-    }
-
-    public void setInfo(MenuInfo info) {
-        this.info = info;
     }
 
     public Menu getDeveloperMenu() {
@@ -57,7 +47,7 @@ public class InfoResult extends Result {
                 try {
                     menu.add(AbstractButton.createAbstractButton(item.getName(), item.getKey(), item.getUrl(), item.getType(), null, null));
                 } catch (JsonMappingException e) {
-                    logger.warn("faild to mapping developer menu", e);
+                    log.warn("faild to mapping developer menu", e);
                 }
             } else {
                 SubButton button = new SubButton();
@@ -66,7 +56,7 @@ public class InfoResult extends Result {
                     try {
                         button.add(AbstractButton.createAbstractButton(i.getName(), i.getKey(), item.getUrl(), item.getType(), null, null));
                     } catch (JsonMappingException e) {
-                        logger.warn("faild to mapping developer menu", e);
+                        log.warn("faild to mapping developer menu", e);
                     }
                 }
                 menu.add(button);
@@ -100,37 +90,24 @@ public class InfoResult extends Result {
         return !isFromWeChat();
     }
 
-    @Override
-    public String toString() {
-        return "InfoResult{" +
-                "errorCode = " + getErrorCode() +
-                ", errorMsg='" + getErrorMessage() + '\'' +
-                ", open=" + open +
-                ", info=" + info +
-                '}';
-    }
 
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class MenuInfo implements Serializable {
 
+        private static final long serialVersionUID = -4342846635434414251L;
         @JsonProperty("button")
-        private ArrayList<MenuInfo.MenuItem> buttons;
+        private Iterable<MenuItem> buttons;
 
-        public ArrayList<MenuInfo.MenuItem> getButtons() {
-            return buttons;
-        }
 
-        public void setButtons(ArrayList<MenuInfo.MenuItem> buttons) {
-            this.buttons = buttons;
-        }
-
-        @Override
-        public String toString() {
-            return "MenuInfo{" +
-                    "buttons=" + buttons +
-                    '}';
-        }
-
+        @Data
+        @Builder
+        @NoArgsConstructor
+        @AllArgsConstructor
         public static class MenuItem implements Serializable {
+            private static final long serialVersionUID = -3739665413783973262L;
             @JsonProperty("name")
             private String name;
             @JsonProperty("type")
@@ -142,120 +119,36 @@ public class InfoResult extends Result {
             @JsonProperty("key")
             private String key;
             @JsonProperty("sub_button")
-            private MenuInfo.MenuItem.ItemsHolder subMenu;
+            private ItemsHolder subMenu;
             @JsonProperty("news_info")
-            private MenuInfo.MenuItem.NewsHolder newsInfo;
+            private NewsHolder newsInfo;
 
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public String getValue() {
-                return value;
-            }
-
-            public void setValue(String value) {
-                this.value = value;
-            }
-
-            public String getKey() {
-                return key;
-            }
-
-            public void setKey(String key) {
-                this.key = key;
-            }
-
-            public MenuInfo.MenuItem.ItemsHolder getSubMenu() {
-                return subMenu;
-            }
-
-            public void setSubMenu(MenuInfo.MenuItem.ItemsHolder subMenu) {
-                this.subMenu = subMenu;
-            }
-
-            public MenuInfo.MenuItem.NewsHolder getNewsInfo() {
-                return newsInfo;
-            }
-
-            public void setNewsInfo(MenuInfo.MenuItem.NewsHolder newsInfo) {
-                this.newsInfo = newsInfo;
-            }
-
-            @Override
-            public String toString() {
-                return "MenuItem{" +
-                        "name='" + name + '\'' +
-                        ", type='" + type + '\'' +
-                        ", url='" + url + '\'' +
-                        ", value='" + value + '\'' +
-                        ", key='" + key + '\'' +
-                        ", subMenu=" + subMenu +
-                        ", newsInfo=" + newsInfo +
-                        '}';
-            }
-
+            @Data
+            @Builder
+            @NoArgsConstructor
+            @AllArgsConstructor
             public static class ItemsHolder implements Serializable {
+                private static final long serialVersionUID = -9083596949049016787L;
                 @JsonProperty("list")
-                private ArrayList<MenuInfo.MenuItem> list;
-
-                public ArrayList<MenuInfo.MenuItem> getList() {
-                    return list;
-                }
-
-                public void setList(ArrayList<MenuInfo.MenuItem> list) {
-                    this.list = list;
-                }
-
-                @Override
-                public String toString() {
-                    return "ItemsHolder{" +
-                            "list=" + list +
-                            '}';
-                }
+                private List<MenuItem> list;
             }
 
+            @Data
+            @Builder
+            @NoArgsConstructor
+            @AllArgsConstructor
             public static class NewsHolder implements Serializable {
+                private static final long serialVersionUID = 6392661375489315277L;
                 @JsonProperty("list")
-                private ArrayList<MenuInfo.MenuItem.NewsInfo> list;
-
-                public ArrayList<MenuInfo.MenuItem.NewsInfo> getList() {
-                    return list;
-                }
-
-                public void setList(ArrayList<MenuInfo.MenuItem.NewsInfo> list) {
-                    this.list = list;
-                }
-
-                @Override
-                public String toString() {
-                    return "NewsHolder{" +
-                            "list=" + list +
-                            '}';
-                }
+                private List<NewsInfo> list;
             }
 
+            @Data
+            @Builder
+            @NoArgsConstructor
+            @AllArgsConstructor
             public static class NewsInfo implements Serializable {
+                private static final long serialVersionUID = -5632997040055918048L;
                 @JsonProperty("title")
                 private String title;
                 @JsonProperty("author")
@@ -270,75 +163,6 @@ public class InfoResult extends Result {
                 private String contentUrl;
                 @JsonProperty("source_url")
                 private String sourceUrl;
-
-                public String getTitle() {
-                    return title;
-                }
-
-                public void setTitle(String title) {
-                    this.title = title;
-                }
-
-                public String getAuthor() {
-                    return author;
-                }
-
-                public void setAuthor(String author) {
-                    this.author = author;
-                }
-
-                public String getDigest() {
-                    return digest;
-                }
-
-                public void setDigest(String digest) {
-                    this.digest = digest;
-                }
-
-                public int getShowCover() {
-                    return showCover;
-                }
-
-                public void setShowCover(int showCover) {
-                    this.showCover = showCover;
-                }
-
-                public String getCoverUrl() {
-                    return coverUrl;
-                }
-
-                public void setCoverUrl(String coverUrl) {
-                    this.coverUrl = coverUrl;
-                }
-
-                public String getContentUrl() {
-                    return contentUrl;
-                }
-
-                public void setContentUrl(String contentUrl) {
-                    this.contentUrl = contentUrl;
-                }
-
-                public String getSourceUrl() {
-                    return sourceUrl;
-                }
-
-                public void setSourceUrl(String sourceUrl) {
-                    this.sourceUrl = sourceUrl;
-                }
-
-                @Override
-                public String toString() {
-                    return "NewsInfo{" +
-                            "title='" + title + '\'' +
-                            ", author='" + author + '\'' +
-                            ", digest='" + digest + '\'' +
-                            ", showCover=" + showCover +
-                            ", coverUrl='" + coverUrl + '\'' +
-                            ", contentUrl='" + contentUrl + '\'' +
-                            ", sourceUrl='" + sourceUrl + '\'' +
-                            '}';
-                }
             }
         }
     }

@@ -1,16 +1,31 @@
 package ian.hu.wechat.sdk.service.core.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 /**
  * 接口调用返回
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Result implements Serializable {
     private static final long serialVersionUID = -8572159414269679601L;
+    /**
+     * 获取错误码
+     */
     @JsonProperty("errcode")
     private Integer errorCode;
+
+    /**
+     * 获取错误提示
+     */
     @JsonProperty("errmsg")
     private String errorMessage;
 
@@ -20,31 +35,7 @@ public class Result implements Serializable {
      * @return 0表示ok
      */
     public Integer getErrorCode() {
-        return errorCode;
+        return errorCode == null ? 0 : errorCode;
     }
 
-    public void setErrorCode(Integer errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    /**
-     * 获取错误提示
-     *
-     * @return 提示消息
-     */
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    @Override
-    public String toString() {
-        return "Result{" +
-                "errorCode=" + getErrorCode() +
-                ", errorMessage='" + getErrorMessage() + '\'' +
-                '}';
-    }
 }

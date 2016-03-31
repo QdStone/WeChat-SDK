@@ -7,4 +7,5 @@ import ian.hu.wechat.sdk.service.core.result.Result;
  */
 public class CreateResult extends Result {
 
+    private static final long serialVersionUID = 2437773898567108179L;
 }

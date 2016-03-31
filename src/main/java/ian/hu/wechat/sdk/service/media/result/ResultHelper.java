@@ -6,8 +6,14 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.File;
+import java.util.regex.Pattern;
 
-public class ResultHelper {
+public final class ResultHelper {
+    private static final Pattern HEADER_PATTERN = Pattern.compile("^.*filename=\"([^\"]*)\"");
+
+    private ResultHelper() {
+    }
+
     public static <T extends CompositeResult> T from(Response response, Class<T> clazz) {
         T result;
         try {
@@ -17,7 +23,7 @@ public class ResultHelper {
         }
         MediaType from = result.fromMediaType();
         MediaType ref = response.getMediaType();
-        if (from.isWildcardType() || (from.getType().equalsIgnoreCase(ref.getType()) && (from.isWildcardSubtype() || from.getSubtype().equalsIgnoreCase(ref.getSubtype())))) {
+        if (from.isWildcardType() || from.getType().equalsIgnoreCase(ref.getType()) && (from.isWildcardSubtype() || from.getSubtype().equalsIgnoreCase(ref.getSubtype()))) {
             response.getHeaders().putSingle(HttpHeaders.CONTENT_TYPE, result.toMediaType());
             return response.readEntity(clazz);
         }
@@ -32,7 +38,7 @@ public class ResultHelper {
         response.getHeaders().putSingle(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_TYPE);
         try {
             result.setFile(response.readEntity(File.class));
-            result.setFileName(contentDisposition.toString().replaceAll("^.*filename=\"([^\"]*)\"", "$1"));
+            result.setFileName(HEADER_PATTERN.matcher(contentDisposition.toString()).replaceAll("$1"));
             result.setErrorCode(0);
             result.setErrorMessage("ok");
         } catch (ProcessingException e) {

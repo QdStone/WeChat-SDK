@@ -30,7 +30,7 @@ public class MediaServiceTest {
     static String imageMediaId;
     static String materialMediaId;
 
-    static MediaService service = ServiceHelper.get(client, /*"http://weimob.tunnel.qydev.com/"*/null, MediaService.class);
+    static MediaService service = ServiceHelper.getService(client, /*"http://weimob.tunnel.qydev.com/"*/null, MediaService.class);
 
     @BeforeClass
     public static void beforeClass() {

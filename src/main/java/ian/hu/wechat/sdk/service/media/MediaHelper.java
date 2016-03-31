@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * 素材工具类
  */
-public class MediaHelper {
+public final class MediaHelper {
 
     private static final String MAGIC_STRING = "fw_____";
 

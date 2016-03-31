@@ -182,7 +182,7 @@ public class RawResponse implements Serializable {
          * @param from 公众号id
          * @param to   用户id
          * @param text 文本内容
-         * @return Builder.get()获得构建的回复
+         * @return Builder.getService()获得构建的回复
          */
         public static Builder text(String from, String to, String text) {
             return build(from, to, null, TYPE_TEXT).setContent(text);
@@ -194,7 +194,7 @@ public class RawResponse implements Serializable {
          * @param from    公众号id
          * @param to      用户Id
          * @param mediaId 图片的MediaId
-         * @return Builder.get()获得构建的回复
+         * @return Builder.getService()获得构建的回复
          */
         public static Builder image(String from, String to, String mediaId) {
             return build(from, to, null, TYPE_IMAGE).setImage(mediaId);

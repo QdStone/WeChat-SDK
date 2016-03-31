@@ -1,5 +1,6 @@
 package ian.hu.wechat.sdk.utils;
 
+import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.RandomStringUtils;
@@ -43,9 +44,13 @@ import java.util.Map;
  * @see #encrypt(String, String, String) 加密方法
  * @see #decrypt(String, String) 解密方法
  */
-public class WeChatUtils {
+@CommonsLog
+public final class WeChatUtils {
 
     private static final Charset CHARSET = Charset.forName("utf-8");
+
+    private WeChatUtils() {
+    }
 
     /**
      * 生成消息签名
@@ -70,7 +75,7 @@ public class WeChatUtils {
      * @return 返回签名
      */
     public static String getSHA1ForMessage(String text, String token, String nonce, Long timestamp) {
-        String[] strings = new String[]{text, token, nonce, String.valueOf(timestamp)};
+        String[] strings = {text, token, nonce, String.valueOf(timestamp)};
         Arrays.sort(strings);
         StringBuilder sb = new StringBuilder();
         for (String s : strings) {
@@ -93,6 +98,7 @@ public class WeChatUtils {
      * @throws BadPaddingException                不正确的对齐方式
      * @throws IllegalBlockSizeException          非法的块大小
      */
+    @SuppressWarnings("MethodWithTooExceptionsDeclared")
     public static String encrypt(String text, String aesKey, String appId) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         String randomStr = RandomStringUtils.random(16, true, true);
         byte[] aesKeyBytes = Base64.decodeBase64(aesKey + "=");
@@ -131,6 +137,7 @@ public class WeChatUtils {
         return Base64.encodeBase64String(encrypted);
     }
 
+    @SuppressWarnings("MethodWithTooExceptionsDeclared")
     public static String decrypt(String encrypt, String aesKey) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidAlgorithmParameterException, InvalidKeyException {
         // 设置解密模式为AES的CBC模式
         Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
@@ -155,20 +162,21 @@ public class WeChatUtils {
     protected static byte[] encodePKCS7(int count) {
         int blockSize = 32;
         // 计算需要填充的位数
-        int amountToPad = blockSize - (count % blockSize);
+        int amountToPad = blockSize - count % blockSize;
         if (amountToPad == 0) {
             amountToPad = blockSize;
         }
         // 获得补位所用的字符
+        //noinspection NumericCastThatLosesPrecision
         char padChr = (char) (amountToPad & 0xff);
-        String tmp = "";
+        StringBuilder tmp = new StringBuilder();
         for (int index = 0; index < amountToPad; index++) {
-            tmp += padChr;
+            tmp.append(padChr);
         }
-        return tmp.getBytes(CHARSET);
+        return tmp.toString().getBytes(CHARSET);
     }
 
-    protected static byte[] decodePKCS7(byte[] bytes) {
+    private static byte[] decodePKCS7(byte... bytes) {
         int pad = (int) bytes[bytes.length - 1];
         if (pad < 1 || pad > 32) {
             pad = 0;
@@ -177,7 +185,7 @@ public class WeChatUtils {
     }
 
     // 还原4个字节的网络字节序
-    protected static int recoverNetworkBytesOrder(byte[] orderBytes) {
+    private static int recoverNetworkBytesOrder(byte... orderBytes) {
         int sourceNumber = 0;
         for (int i = 0; i < 4; i++) {
             sourceNumber <<= 8;
@@ -187,7 +195,8 @@ public class WeChatUtils {
     }
 
     // 生成4个字节的网络字节序
-    protected static byte[] getNetworkBytesOrder(int length) {
+    @SuppressWarnings("NumericCastThatLosesPrecision")
+    private static byte[] getNetworkBytesOrder(int length) {
         byte[] orderBytes = new byte[4];
         orderBytes[3] = (byte) (length & 0xFF);
         orderBytes[2] = (byte) (length >> 8 & 0xFF);
@@ -197,25 +206,19 @@ public class WeChatUtils {
     }
 
     public static HashMap<String, Object> parseXml(String xml) {
-        HashMap<String, Object> data = null;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(new InputSource(new StringReader(xml)));
             // 解析
-            data = parse(doc.getDocumentElement().getChildNodes());
-            return data;
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return parse(doc.getDocumentElement().getChildNodes());
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            log.error(e);
         }
         return null;
     }
 
-    protected static HashMap<String, Object> parse(NodeList nodeList) {
+    private static HashMap<String, Object> parse(NodeList nodeList) {
         HashMap<String, Object> data = new HashMap<String, Object>();
         boolean foundChild = false;
         for (int i = 0; i < nodeList.getLength(); i++) {
@@ -224,7 +227,7 @@ public class WeChatUtils {
                 // 有子节点
                 foundChild = true;
                 Element child = (Element) node;
-                HashMap<String, Object> childData = null;
+                Map<String, Object> childData = null;
                 if (child.hasChildNodes()) {
                     // 进一步parse
                     childData = parse(child.getChildNodes());
@@ -280,14 +283,13 @@ public class WeChatUtils {
         try {
             return bos.toString("utf-8");
         } catch (UnsupportedEncodingException e) {
-            //e.printStackTrace();
-            // nerver reachable
+            log.error(e);
             return null;
         }
 
     }
 
-    protected static void generateElement(Element parent, HashMap<String, Object> data) {
+    private static void generateElement(Element parent, Map<String, Object> data) {
         Document doc = parent.getOwnerDocument();
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             Element element = doc.createElement(entry.getKey());
@@ -295,7 +297,7 @@ public class WeChatUtils {
             Object value = entry.getValue();
             if (value instanceof HashMap) {
                 //noinspection unchecked
-                generateElement(element, (HashMap<String, Object>) value);
+                generateElement(element, (Map<String, Object>) value);
             } else {
                 element.setTextContent(value.toString());
             }

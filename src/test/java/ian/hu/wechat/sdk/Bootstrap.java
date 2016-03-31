@@ -26,7 +26,7 @@ public class Bootstrap {
             String accessToken;
             File file = new File(accessTokenFilePath);
             if (!file.exists() || file.lastModified() < (new Date().getTime() - 7200000)) {
-                AccessTokenService service = ServiceHelper.get(AccessTokenService.class);
+                AccessTokenService service = ServiceHelper.getService(AccessTokenService.class);
                 AccessTokenResult result = service.get(appId, appSecret, AccessTokenService.GRANT_TYPE_CLIENT_CREDENTIAL);
                 if (!Integer.valueOf(0).equals(result.getErrorCode())) {
                     throw new RuntimeException("appId or appSecret is not valid");

@@ -23,8 +23,4 @@ public class AddMaterialResult extends Result {
     private String mediaId;
     @JsonProperty("url")
     private String url;
-    @Override
-    public Integer getErrorCode() {
-        return mediaId == null ? super.getErrorCode() : 0;
-    }
 }

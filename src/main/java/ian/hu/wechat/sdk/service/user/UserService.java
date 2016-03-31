@@ -7,6 +7,7 @@ import ian.hu.wechat.sdk.service.user.param.*;
 import ian.hu.wechat.sdk.service.user.result.AddGroupResult;
 import ian.hu.wechat.sdk.service.user.result.GetGroupsResult;
 import ian.hu.wechat.sdk.service.user.result.GetUserGroupResult;
+import ian.hu.wechat.sdk.service.user.result.GetUserInfoResult;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,7 +17,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Produces(MediaType.APPLICATION_JSON)
 public interface UserService extends Service {
-    public static final String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
+    String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
 
     @POST
     @Path("groups/create")
@@ -24,7 +25,7 @@ public interface UserService extends Service {
     AddGroupResult addGroup(@QueryParam("access_token") String accessToken, AddGroupParam param);
 
     @GET
-    @Path("groups/get")
+    @Path("groups/getService")
     GetGroupsResult getGroups(@QueryParam("access_token") String accessToken);
 
     @POST

@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public interface MenuService extends Service {
 
-    public static final String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
+    String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -28,7 +28,7 @@ public interface MenuService extends Service {
     DeleteResult delete(@QueryParam("access_token") String accessToken);
 
     @GET
-    @Path("menu/get")
+    @Path("menu/getService")
     GetResult get(@QueryParam("access_token") String accessToken);
 
     @GET

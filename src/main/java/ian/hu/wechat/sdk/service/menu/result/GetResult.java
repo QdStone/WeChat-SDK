@@ -8,6 +8,7 @@ import ian.hu.wechat.sdk.service.core.result.Result;
  * 获取菜单的返回结果
  */
 public class GetResult extends Result {
+    private static final long serialVersionUID = 5776975408194272503L;
     @JsonProperty("menu")
     protected Menu menu;
 

@@ -12,10 +12,13 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * 序列化为XML或者从XML反序列化
  */
-public class MashallerUtils {
-    private static final ConcurrentMap<Class, JAXBContext> jaxbContexts = new ConcurrentHashMap<Class, JAXBContext>(64);
+public final class MashallerUtils {
+    private static final ConcurrentMap<Class<?>, JAXBContext> jaxbContexts = new ConcurrentHashMap<Class<?>, JAXBContext>(64);
 
-    protected static JAXBContext getJaxbContext(Class clazz) {
+    private MashallerUtils() {
+    }
+
+    protected static JAXBContext getJaxbContext(Class<?> clazz) {
         if (clazz == null) {
             throw new IllegalArgumentException("'clazz should not be null'");
         }
@@ -32,7 +35,7 @@ public class MashallerUtils {
         return jaxbContext;
     }
 
-    public static Marshaller getMarshaller(Class clazz) {
+    public static Marshaller getMarshaller(Class<?> clazz) {
         try {
             JAXBContext jaxbContext = getJaxbContext(clazz);
             return jaxbContext.createMarshaller();
@@ -42,7 +45,7 @@ public class MashallerUtils {
         }
     }
 
-    public static Unmarshaller getUnmarshaller(Class clazz) {
+    public static Unmarshaller getUnmarshaller(Class<?> clazz) {
         try {
             JAXBContext jaxbContext = getJaxbContext(clazz);
             return jaxbContext.createUnmarshaller();

@@ -1,43 +1,20 @@
 package ian.hu.wechat.sdk.service.user.param;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
  * 修改备注参数
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdateRemarkParam implements Serializable {
+    private static final long serialVersionUID = -1457201580758543609L;
     private String openId;
-    private String remark;
-
-    public String getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "UpdateRemarkParam{" +
-                "openId='" + openId + '\'' +
-                ", remark='" + remark + '\'' +
-                '}';
-    }
-
-    public UpdateRemarkParam() {
-    }
-
-    public UpdateRemarkParam(String openId, String remark) {
-        this.openId = openId;
-        this.remark = remark;
-    }
-}
+    private String remark;}

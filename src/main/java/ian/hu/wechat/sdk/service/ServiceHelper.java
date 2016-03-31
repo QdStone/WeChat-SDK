@@ -1,9 +1,10 @@
 package ian.hu.wechat.sdk.service;
 
 import ian.hu.wechat.sdk.debug.LoggingFilter;
+import ian.hu.wechat.sdk.rest.MultipartFormDataWriter;
 import ian.hu.wechat.sdk.rest.annotation.OverrideMediaType;
+import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.lang.reflect.FieldUtils;
-import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.resteasy.util.FindAnnotation;
@@ -22,11 +23,10 @@ import java.io.IOException;
 /**
  * 微信服务工具类
  */
-public class ServiceHelper {
+@CommonsLog
+public final class ServiceHelper {
 
-    private static final Log logger = LogFactory.getLog(ServiceHelper.class);
-
-    public static <T extends Service> T get(Client client, String baseUrl, Class<T> clazz) {
+    public static <T extends Service> T getService(Client client, String baseUrl, Class<T> clazz) {
 
         if (client == null) {
             client = ClientBuilder.newClient();
@@ -36,24 +36,24 @@ public class ServiceHelper {
             client.register(LoggingFilter.class);
         }
 
-        client.register(ian.hu.wechat.sdk.rest.MultipartFormDataWriter.class);
+        client.register(MultipartFormDataWriter.class);
         if (baseUrl == null) {
             try {
                 baseUrl = FieldUtils.getDeclaredField(clazz, "DEFAULT_URL").get(clazz).toString();
             } catch (IllegalAccessException e) {
-                logger.warn("faild to get DEFAULT_URL and the baseUrl param is null", e);
+                log.warn("faild to getService DEFAULT_URL and the baseUrl param is null", e);
             }
         }
         ResteasyWebTarget target = (ResteasyWebTarget) client.target(baseUrl);
         return target.proxy(clazz);
     }
 
-    public static <T extends Service> T get(Client client, Class<T> clazz) {
-        return get(client, null, clazz);
+    public static <T extends Service> T getService(Client client, Class<T> clazz) {
+        return getService(client, null, clazz);
     }
 
-    public static <T extends Service> T get(Class<T> clazz) {
-        return get(null, null, clazz);
+    public static <T extends Service> T getService(Class<T> clazz) {
+        return getService(null, null, clazz);
     }
 
     /**
@@ -68,7 +68,7 @@ public class ServiceHelper {
      *     // or on method
      *     {@literal @}GET
      *     {@literal @}OverrideMediaType(MediaType.APPLICATION_JSON)
-     *     MyJsonObj get(...);
+     *     MyJsonObj getService(...);
      * }
      * </code>
      * </pre>
@@ -79,8 +79,14 @@ public class ServiceHelper {
     @Priority(Priorities.USER)
     public static class MediaTypeInterceptor implements ReaderInterceptor {
 
+        /**
+         * @param context context
+         * @return object
+         * @throws IOException io error
+         * @throws WebApplicationException app error
+         */
         @Override
-        public Object aroundReadFrom(ReaderInterceptorContext context) throws IOException, WebApplicationException {
+        public Object aroundReadFrom(ReaderInterceptorContext context) throws IOException {
             OverrideMediaType overrideMediaTypeAnnotation = null;
             if (context.getType() != null && context.getAnnotations() != null) {
                 overrideMediaTypeAnnotation = FindAnnotation.findAnnotation(context.getType(), context.getAnnotations(),
@@ -93,7 +99,7 @@ public class ServiceHelper {
             MediaType to = MediaType.valueOf(overrideMediaTypeAnnotation.value());
             MediaType ref = context.getMediaType();
             if (from.isWildcardType() || from.getType().equalsIgnoreCase(ref.getType()) && (from.isWildcardSubtype() || from.getSubtype().equalsIgnoreCase(ref.getSubtype()))) {
-                logger.debug(String.format("Context media type '%s' is included in '%s' will be replaced.", context.getMediaType().toString(), from.toString()));
+                log.debug(String.format("Context media type '%s' is included in '%s' will be replaced.", context.getMediaType().toString(), from.toString()));
                 context.setMediaType(to);
             }
             return context.proceed();
