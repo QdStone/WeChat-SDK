@@ -23,6 +23,6 @@ public class MultipartFormDataWriter extends org.jboss.resteasy.plugins.provider
             }
         };
         super.write(multipartOutput, mediaType, httpHeaders, partsStream);
-        entityStream.write("\r\n".getBytes());
+        entityStream.write("\r\n".getBytes("utf-8"));
     }
 }

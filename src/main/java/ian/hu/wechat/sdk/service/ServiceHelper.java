@@ -79,6 +79,7 @@ public class ServiceHelper {
     @Priority(Priorities.USER)
     public static class MediaTypeInterceptor implements ReaderInterceptor {
 
+        @Override
         public Object aroundReadFrom(ReaderInterceptorContext context) throws IOException, WebApplicationException {
             OverrideMediaType overrideMediaTypeAnnotation = null;
             if (context.getType() != null && context.getAnnotations() != null) {
@@ -91,7 +92,7 @@ public class ServiceHelper {
             MediaType from = MediaType.valueOf(overrideMediaTypeAnnotation.from());
             MediaType to = MediaType.valueOf(overrideMediaTypeAnnotation.value());
             MediaType ref = context.getMediaType();
-            if (from.isWildcardType() || (from.getType().equalsIgnoreCase(ref.getType()) && (from.isWildcardSubtype() || from.getSubtype().equalsIgnoreCase(ref.getSubtype())))) {
+            if (from.isWildcardType() || from.getType().equalsIgnoreCase(ref.getType()) && (from.isWildcardSubtype() || from.getSubtype().equalsIgnoreCase(ref.getSubtype()))) {
                 logger.debug(String.format("Context media type '%s' is included in '%s' will be replaced.", context.getMediaType().toString(), from.toString()));
                 context.setMediaType(to);
             }
