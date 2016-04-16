@@ -45,4 +45,13 @@ public class Result implements Serializable {
         errorCode = code;
     }
 
+    /**
+     * 返回枚举的错误
+     * @return Errors
+     *
+     * @see Errors
+     */
+    public Errors getError() {
+        return Errors.get(getErrorCode());
+    }
 }
