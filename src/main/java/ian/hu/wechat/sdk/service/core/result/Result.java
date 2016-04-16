@@ -1,8 +1,8 @@
 package ian.hu.wechat.sdk.service.core.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ian.hu.wechat.sdk.service.Errors;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +20,7 @@ public class Result implements Serializable {
      * 获取错误码
      */
     @JsonProperty("errcode")
-    private Integer errorCode;
+    private Long errorCode;
 
     /**
      * 获取错误提示
@@ -33,15 +33,15 @@ public class Result implements Serializable {
      *
      * @return 0表示ok
      */
-    public Integer getErrorCode() {
-        return errorCode == null ? 0 : errorCode;
+    public Long getErrorCode() {
+        return errorCode == null ? Errors.OK.getCode() : errorCode;
     }
 
     public void setErrorMessage(String msg) {
         errorMessage = msg;
     }
 
-    public void setErrorCode(int code) {
+    public void setErrorCode(long code) {
         errorCode = code;
     }
 

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import ian.hu.wechat.sdk.entity.menu.Menu;
 import ian.hu.wechat.sdk.entity.menu.button.AbstractButton;
 import ian.hu.wechat.sdk.entity.menu.button.SubButton;
+import ian.hu.wechat.sdk.service.Errors;
 import ian.hu.wechat.sdk.service.core.result.Result;
 import lombok.*;
 import lombok.extern.apachecommons.CommonsLog;
@@ -30,8 +31,8 @@ public class InfoResult extends Result {
     protected MenuInfo info;
 
     @Override
-    public Integer getErrorCode() {
-        return open != null ? 0 : super.getErrorCode();
+    public Long getErrorCode() {
+        return open != null ? Errors.OK.getCode() : super.getErrorCode();
     }
 
     public Menu getDeveloperMenu() {

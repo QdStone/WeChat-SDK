@@ -1,6 +1,7 @@
 package ian.hu.wechat.sdk.service.user.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ian.hu.wechat.sdk.service.Errors;
 import ian.hu.wechat.sdk.service.core.result.Result;
 import lombok.*;
 
@@ -20,7 +21,7 @@ public class GetGroupsResult extends Result {
     private List<GroupItem> groups;
 
     @Override
-    public Integer getErrorCode() {
-        return groups != null ? 0 : super.getErrorCode();
+    public Long getErrorCode() {
+        return groups != null ? Errors.OK.getCode() : super.getErrorCode();
     }
 }

@@ -2,6 +2,7 @@ package ian.hu.wechat.sdk.service.media.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ian.hu.wechat.sdk.entity.media.NewsItem;
+import ian.hu.wechat.sdk.service.Errors;
 import ian.hu.wechat.sdk.service.core.result.Result;
 import lombok.*;
 
@@ -52,8 +53,8 @@ public class GetMaterialResult extends Result implements CompositeResult {
 
 
     @Override
-    public Integer getErrorCode() {
-        return newsItems != null || downloadUrl != null || file != null ? 0 : super.getErrorCode();
+    public Long getErrorCode() {
+        return newsItems != null || downloadUrl != null || file != null ? Errors.OK.getCode() : super.getErrorCode();
     }
 
 

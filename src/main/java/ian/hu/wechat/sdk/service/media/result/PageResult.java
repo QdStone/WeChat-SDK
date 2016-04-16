@@ -2,6 +2,7 @@ package ian.hu.wechat.sdk.service.media.result;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ian.hu.wechat.sdk.service.Errors;
 import ian.hu.wechat.sdk.service.core.result.Result;
 import lombok.*;
 
@@ -30,7 +31,7 @@ public class PageResult extends Result {
     }
 
     @Override
-    public Integer getErrorCode() {
-        return totalCount == null ? super.getErrorCode() : 0;
+    public Long getErrorCode() {
+        return totalCount == null ? super.getErrorCode() : Errors.OK.getCode();
     }
 }

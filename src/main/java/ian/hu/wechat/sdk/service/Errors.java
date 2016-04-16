@@ -1,4 +1,4 @@
-package ian.hu.wechat.sdk.service.core.result;
+package ian.hu.wechat.sdk.service;
 
 import java.util.HashMap;
 import java.util.Map;

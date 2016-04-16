@@ -2,6 +2,7 @@ package ian.hu.wechat.sdk.service.core.result;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import ian.hu.wechat.sdk.entity.core.AccessToken;
+import ian.hu.wechat.sdk.service.Errors;
 
 /**
  * 获取AccessToken的结果
@@ -25,8 +26,8 @@ public class AccessTokenResult extends Result {
     }
 
     @Override
-    public Integer getErrorCode() {
-        return getAccessToken() == null ? super.getErrorCode() : 0;
+    public Long getErrorCode() {
+        return getAccessToken() == null ? super.getErrorCode() : Errors.OK.getCode();
     }
 
     @Override

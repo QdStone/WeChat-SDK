@@ -18,7 +18,6 @@ import java.util.Locale;
  */
 @Data
 @Builder
-
 @NoArgsConstructor
 @AllArgsConstructor
 public class Menu implements Serializable {
@@ -41,6 +40,8 @@ public class Menu implements Serializable {
     @SuppressWarnings("FieldMayBeFinal")
     @JsonProperty("button")
     private List<AbstractButton> buttons = new ArrayList<AbstractButton>();
+    @JsonProperty("menuid")
+    private Long menuId;
 
     public Boolean add(AbstractButton button) {
         if (buttons.size() >= 3) {

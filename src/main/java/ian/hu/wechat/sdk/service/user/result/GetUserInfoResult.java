@@ -2,6 +2,7 @@ package ian.hu.wechat.sdk.service.user.result;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import ian.hu.wechat.sdk.entity.user.UserInfo;
+import ian.hu.wechat.sdk.service.Errors;
 import ian.hu.wechat.sdk.service.core.result.Result;
 import lombok.*;
 
@@ -18,7 +19,7 @@ public class GetUserInfoResult extends Result {
     private UserInfo info;
 
     @Override
-    public Integer getErrorCode() {
-        return info != null && info.getSubscribe() != null ? 0 : super.getErrorCode();
+    public Long getErrorCode() {
+        return info != null && info.getSubscribe() != null ? Errors.OK.getCode() : super.getErrorCode();
     }
 }

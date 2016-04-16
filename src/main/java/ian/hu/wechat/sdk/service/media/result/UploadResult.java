@@ -2,6 +2,7 @@ package ian.hu.wechat.sdk.service.media.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ian.hu.wechat.sdk.rest.annotation.OverrideMediaType;
+import ian.hu.wechat.sdk.service.Errors;
 import ian.hu.wechat.sdk.service.core.result.Result;
 import lombok.*;
 
@@ -21,8 +22,8 @@ public class UploadResult extends Result {
     private String url;
 
     @Override
-    public Integer getErrorCode() {
-        return url == null ? super.getErrorCode() : 0;
+    public Long getErrorCode() {
+        return url == null ? super.getErrorCode() : Errors.OK.getCode();
     }
 
 }
