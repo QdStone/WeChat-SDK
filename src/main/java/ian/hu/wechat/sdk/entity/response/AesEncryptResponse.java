@@ -82,6 +82,7 @@ public class AesEncryptResponse implements EncryptResponse {
     }
 
 
+    @Override
     public RawResponse toRaw(String... args) {
         if (args.length != 1) {
             throw new IllegalArgumentException("'args' should be only 1 elements as it will be the aesKey");
@@ -103,6 +104,7 @@ public class AesEncryptResponse implements EncryptResponse {
         }
     }
 
+    @Override
     public EncryptResponse fromRaw(RawResponse response, String... args) {
         if (args.length != 5) {
             throw new IllegalArgumentException("'args' should have 5 elements");

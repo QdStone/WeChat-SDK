@@ -10,7 +10,6 @@ public class ScanWait extends Click {
     private static final long serialVersionUID = -8435159693314793267L;
 
     public ScanWait() {
-        super();
     }
 
     public ScanWait(String name, String key) {

@@ -94,7 +94,7 @@ public class LoggingFilter implements ContainerRequestFilter, ClientRequestFilte
         logger.info(msg.toString());
     }
 
-    protected static class OutputStreamWrapper extends OutputStream {
+    protected static final class OutputStreamWrapper extends OutputStream {
 
         private final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         private final OutputStream output;

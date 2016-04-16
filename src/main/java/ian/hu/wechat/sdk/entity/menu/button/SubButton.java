@@ -17,7 +17,7 @@ public class SubButton extends AbstractButton {
     }
 
     public SubButton(String name) {
-        this.setName(name);
+        setName(name);
     }
 
     public ArrayList<AbstractButton> getSubButtons() {

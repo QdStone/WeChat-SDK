@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public interface MenuService extends Service {
 
-    static final String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
+    String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
 
     /**
      * 创建自定义菜单

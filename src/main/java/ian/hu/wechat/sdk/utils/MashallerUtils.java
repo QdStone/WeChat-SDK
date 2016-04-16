@@ -18,7 +18,7 @@ public final class MashallerUtils {
     private MashallerUtils() {
     }
 
-    protected static JAXBContext getJaxbContext(Class<?> clazz) {
+    private static JAXBContext getJaxbContext(Class<?> clazz) {
         if (clazz == null) {
             throw new IllegalArgumentException("'clazz should not be null'");
         }

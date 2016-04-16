@@ -10,7 +10,6 @@ public class ScanPush extends Click {
     private static final long serialVersionUID = 5874588727044574626L;
 
     public ScanPush() {
-        super();
     }
 
     public ScanPush(String name, String key) {

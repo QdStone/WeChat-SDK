@@ -1,18 +1,23 @@
 package ian.hu.wechat.sdk;
 
 
+import ian.hu.wechat.sdk.service.Errors;
 import ian.hu.wechat.sdk.service.ServiceHelper;
 import ian.hu.wechat.sdk.service.core.AccessTokenService;
 import ian.hu.wechat.sdk.service.core.result.AccessTokenResult;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class Bootstrap {
+public final class Bootstrap {
+    private Bootstrap() {
+    }
+
     public static void beforeStart() {
         try {
             //Class.forName("org.jboss.resteasy.plugins.providers.multipart.AbstractMultipartWriter");
@@ -28,15 +33,16 @@ public class Bootstrap {
             if (!file.exists() || file.lastModified() < new Date().getTime() - 7200000) {
                 AccessTokenService service = ServiceHelper.getService(AccessTokenService.class);
                 AccessTokenResult result = service.get(appId, appSecret, AccessTokenService.GRANT_TYPE_CLIENT_CREDENTIAL);
-                if (!Integer.valueOf(0).equals(result.getErrorCode())) {
-                    throw new RuntimeException("appId or appSecret is not valid");
+                if (result.getError() == Errors.OK) {
+                    throw new RuntimeException("APP_ID or APP_SECRET is not valid");
                 }
-                FileWriter fw = new FileWriter(file, false);
-                fw.write(accessToken = result.getAccessToken().getAccessToken());
+                PrintStream fw = new PrintStream(new FileOutputStream(file), true, "utf-8");
+                accessToken = result.getAccessToken().getAccessToken();
+                fw.print(accessToken);
                 fw.flush();
                 fw.close();
             } else {
-                Scanner scanner = new Scanner(file);
+                Scanner scanner = new Scanner(file, "utf-8");
                 accessToken = scanner.nextLine();
                 scanner.close();
             }

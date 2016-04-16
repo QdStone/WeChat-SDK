@@ -158,7 +158,7 @@ public final class WeChatUtils {
         return new String(Arrays.copyOfRange(decrypted, 20, 20 + xmlLength), CHARSET);
     }
 
-    protected static byte[] encodePKCS7(int count) {
+    private static byte[] encodePKCS7(int count) {
         int blockSize = 32;
         // 计算需要填充的位数
         int amountToPad = blockSize - count % blockSize;

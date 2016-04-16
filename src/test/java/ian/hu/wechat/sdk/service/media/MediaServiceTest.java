@@ -3,6 +3,7 @@ package ian.hu.wechat.sdk.service.media;
 import ian.hu.wechat.sdk.Bootstrap;
 import ian.hu.wechat.sdk.TestConstants;
 import ian.hu.wechat.sdk.entity.media.NewsItem;
+import ian.hu.wechat.sdk.service.Errors;
 import ian.hu.wechat.sdk.service.ServiceHelper;
 import ian.hu.wechat.sdk.service.media.param.AddNewsParam;
 import ian.hu.wechat.sdk.service.media.param.MediaIdHolder;
@@ -18,6 +19,7 @@ import org.junit.Test;
 import javax.ws.rs.core.Response;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Tests for MediaService
@@ -40,7 +42,7 @@ public class MediaServiceTest {
     @Test
     public void test_create2() {
         MultipartFormDataOutput output = MediaHelper.fromFile(file, null);
-        CreateResult result = service.create(TestConstants.accessToken, "image", output);
+        CreateResult result = service.create(TestConstants.ACCESS_TOKEN, "image", output);
         System.out.println(result);
         Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
         imageMediaId = result.getMedia().getMediaId();
@@ -48,14 +50,14 @@ public class MediaServiceTest {
 
     @Test
     public void test_get() {
-        Response response = service.get(TestConstants.accessToken, imageMediaId);
+        Response response = service.get(TestConstants.ACCESS_TOKEN, imageMediaId);
         System.out.println(GetResult.from(response));
     }
 
     @Test
     public void test_upload() {
         MultipartFormDataOutput output = MediaHelper.fromFile(file, "media");
-        UploadResult result = service.uploadImage(TestConstants.accessToken, output);
+        UploadResult result = service.uploadImage(TestConstants.ACCESS_TOKEN, output);
         System.out.println(result);
         Assert.assertEquals(result.getErrorCode().intValue(), 0);
     }
@@ -64,16 +66,16 @@ public class MediaServiceTest {
     public void test_addMaterial_video() {
         MultipartFormDataOutput output = MediaHelper.fromFile(video, null);
         MediaHelper.addVideoDescription(output, "群之歌", "给群友群主的一首歌");
-        AddMaterialResult result = service.addMaterial(TestConstants.accessToken, MediaService.TYPE_VIDEO, output);
+        AddMaterialResult result = service.addMaterial(TestConstants.ACCESS_TOKEN, MediaService.TYPE_VIDEO, output);
         System.out.println(result);
     }
 
     @Test
     public void test_addNews() {
-        AddMaterialResult result = service.addMaterial(TestConstants.accessToken, "image", MediaHelper.fromFile(file, null));
-        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
+        AddMaterialResult result = service.addMaterial(TestConstants.ACCESS_TOKEN, "image", MediaHelper.fromFile(file, null));
+        Assert.assertEquals(Errors.OK, result.getError());
         AddNewsParam param = new AddNewsParam();
-        ArrayList<NewsItem> news = new ArrayList<NewsItem>();
+        List<NewsItem> news = new ArrayList<NewsItem>();
         NewsItem item = new NewsItem();
         item.setTitle("TestNews");
         item.setContent("Test Content with string");
@@ -83,7 +85,7 @@ public class MediaServiceTest {
         item.setThumbMediaId(result.getMediaId());
         news.add(item);
         param.setNews(news);
-        AddNewsResult result1 = service.addNews(TestConstants.accessToken, param);
+        AddNewsResult result1 = service.addNews(TestConstants.ACCESS_TOKEN, param);
         System.out.println(result1);
         Assert.assertTrue(result1.getErrorCode().equals(0) || result1.getErrorCode().equals(45009));
         materialMediaId = result1.getMediaId();
@@ -91,21 +93,21 @@ public class MediaServiceTest {
 
     @Test
     public void test_count() {
-        CountResult result = service.getCount(TestConstants.accessToken);
+        CountResult result = service.getCount(TestConstants.ACCESS_TOKEN);
         System.out.println(result);
         Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
     }
 
     @Test
     public void test_getPage() {
-        PageResult result = service.getPage(TestConstants.accessToken, new PageParam("news", 0, 3));
+        PageResult result = service.getPage(TestConstants.ACCESS_TOKEN, new PageParam("news", 0, 3));
         System.out.println(result);
         Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
     }
 
     @Test
     public void test_getMaterial() {
-        GetMaterialResult result = GetMaterialResult.from(service.getMaterial(TestConstants.accessToken, new MediaIdHolder(materialMediaId)));
+        GetMaterialResult result = GetMaterialResult.from(service.getMaterial(TestConstants.ACCESS_TOKEN, new MediaIdHolder(materialMediaId)));
         System.out.println(result);
         Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
     }

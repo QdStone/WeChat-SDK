@@ -76,10 +76,10 @@ public class PersonalMenu extends Menu {
     }
 
     public enum Gender {
-        NA, MALE, FEMALE;
+        NA, MALE, FEMALE
     }
 
     public enum PlatfromType {
-        NA, IOS, ANDROID, OTHERS;
+        NA, IOS, ANDROID, OTHERS
     }
 }

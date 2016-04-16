@@ -12,8 +12,8 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public interface AccessTokenService extends Service {
 
-    public static final String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
-    public static final String GRANT_TYPE_CLIENT_CREDENTIAL = "client_credential";
+    String DEFAULT_URL = "https://api.weixin.qq.com/cgi-bin/";
+    String GRANT_TYPE_CLIENT_CREDENTIAL = "client_credential";
 
 
     /**
@@ -21,7 +21,7 @@ public interface AccessTokenService extends Service {
      * 开发者需要自行缓存token
      * @param appId appid
      * @param appSecret appSecret
-     * @param grantType 默认client_credential
+     * @param grantType 默认client_credential {@link #GRANT_TYPE_CLIENT_CREDENTIAL}
      * @return AccessToken
      */
     @GET

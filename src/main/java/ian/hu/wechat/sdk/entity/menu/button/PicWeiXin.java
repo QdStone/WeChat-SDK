@@ -9,7 +9,6 @@ public class PicWeiXin extends Click {
     private static final long serialVersionUID = 1475160432426205607L;
 
     public PicWeiXin() {
-        super();
     }
 
     public PicWeiXin(String name, String key) {

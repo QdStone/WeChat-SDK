@@ -26,7 +26,6 @@ public class ViewLimited extends Button {
     }
 
     public ViewLimited() {
-        super();
     }
 
     public ViewLimited(String name, String mediaId) {

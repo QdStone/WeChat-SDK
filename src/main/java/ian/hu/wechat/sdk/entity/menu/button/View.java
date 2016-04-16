@@ -13,12 +13,11 @@ public class View extends Button {
     protected String url;
 
     public View() {
-        super();
     }
 
     public View(String name, String url) {
         this();
-        this.setName(name);
+        setName(name);
         this.url = url;
     }
 

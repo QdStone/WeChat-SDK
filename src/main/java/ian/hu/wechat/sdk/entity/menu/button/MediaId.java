@@ -7,7 +7,6 @@ public class MediaId extends ViewLimited {
     private static final long serialVersionUID = -3502527872728404305L;
 
     public MediaId() {
-        super();
     }
 
     /**

@@ -32,31 +32,31 @@ public class UserServiceTests {
 
     @Test
     public void test_addGroup() {
-        AddGroupResult result = service.addGroup(TestConstants.accessToken, new AddGroupParam("Test"));
+        AddGroupResult result = service.addGroup(TestConstants.ACCESS_TOKEN, new AddGroupParam("Test"));
         System.out.println(result);
     }
 
     @Test
     public void test_getGroups() {
-        GetGroupsResult result = service.getGroups(TestConstants.accessToken);
+        GetGroupsResult result = service.getGroups(TestConstants.ACCESS_TOKEN);
         System.out.println(result);
     }
 
     @Test
     public void test_getGroup() {
-        GetUserGroupResult result = service.getGroup(TestConstants.accessToken, new OpenIdHolder("ojCVvuA6W4w7fSyVywNkLowz9MXA"));
+        GetUserGroupResult result = service.getGroup(TestConstants.ACCESS_TOKEN, new OpenIdHolder("ojCVvuA6W4w7fSyVywNkLowz9MXA"));
         System.out.println(result);
     }
 
     @Test
     public void test_updateGroup() {
-        Result result = service.updateGroup(TestConstants.accessToken, new UpdateGroupParam(new Group(100, "测试")));
+        Result result = service.updateGroup(TestConstants.ACCESS_TOKEN, new UpdateGroupParam(new Group(100, "测试")));
         System.out.println(result);
     }
 
     @Test
     public void test_memberUpdate() {
-        Result result = service.memberUpdate(TestConstants.accessToken, new MemberUpdateParam("ojCVvuA6W4w7fSyVywNkLowz9MXA", 100));
+        Result result = service.memberUpdate(TestConstants.ACCESS_TOKEN, new MemberUpdateParam("ojCVvuA6W4w7fSyVywNkLowz9MXA", 100));
         System.out.println(result);
     }
 }

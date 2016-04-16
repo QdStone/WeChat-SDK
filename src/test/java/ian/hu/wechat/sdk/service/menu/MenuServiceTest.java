@@ -11,7 +11,7 @@ import org.junit.Test;
 /**
  * Tests for MenuServices
  */
-public class MenuServiceTests {
+public class MenuServiceTest {
 
     @BeforeClass
     public static void beforeClass() {
@@ -21,8 +21,8 @@ public class MenuServiceTests {
     @Test
     public void test_getMenu() {
         MenuService service = ServiceHelper.getService(MenuService.class);
-        GetResult result = service.get(TestConstants.accessToken);
+        GetResult result = service.get(TestConstants.ACCESS_TOKEN);
         System.out.println(result);
-        Assert.assertTrue(result.getErrorCode().equals(0));
+        Assert.assertEquals(0, (long) result.getErrorCode());
     }
 }

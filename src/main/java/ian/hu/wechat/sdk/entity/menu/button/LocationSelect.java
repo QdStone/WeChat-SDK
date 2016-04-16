@@ -9,7 +9,6 @@ public class LocationSelect extends Click {
     private static final long serialVersionUID = -4042932464902927288L;
 
     public LocationSelect() {
-        super();
     }
 
     public LocationSelect(String name, String key) {

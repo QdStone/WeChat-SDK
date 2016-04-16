@@ -22,6 +22,6 @@ public class DeleteGroupParam implements Serializable {
     private Group group;
 
     public DeleteGroupParam(Integer groupId) {
-        this.group = new Group(groupId, null);
+        group = new Group(groupId, null);
     }
 }
