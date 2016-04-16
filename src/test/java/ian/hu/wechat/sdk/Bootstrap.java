@@ -33,7 +33,7 @@ public final class Bootstrap {
             if (!file.exists() || file.lastModified() < new Date().getTime() - 7200000) {
                 AccessTokenService service = ServiceHelper.getService(AccessTokenService.class);
                 AccessTokenResult result = service.get(appId, appSecret, AccessTokenService.GRANT_TYPE_CLIENT_CREDENTIAL);
-                if (result.getError() == Errors.OK) {
+                if (result.getError() != Errors.OK) {
                     throw new RuntimeException("APP_ID or APP_SECRET is not valid");
                 }
                 PrintStream fw = new PrintStream(new FileOutputStream(file), true, "utf-8");
