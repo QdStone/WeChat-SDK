@@ -12,7 +12,6 @@ import java.io.Serializable;
  * 接口调用返回
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Result implements Serializable {
@@ -36,6 +35,14 @@ public class Result implements Serializable {
      */
     public Integer getErrorCode() {
         return errorCode == null ? 0 : errorCode;
+    }
+
+    public void setErrorMessage(String msg) {
+        errorMessage = msg;
+    }
+
+    public void setErrorCode(int code) {
+        errorCode = code;
     }
 
 }

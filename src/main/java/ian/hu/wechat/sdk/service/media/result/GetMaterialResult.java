@@ -45,6 +45,11 @@ public class GetMaterialResult extends Result implements CompositeResult {
         return MediaType.APPLICATION_JSON_TYPE;
     }
 
+    @Override
+    public void setErrorCode(Integer errorCode) {
+        super.setErrorCode(errorCode);
+    }
+
 
     @Override
     public Integer getErrorCode() {

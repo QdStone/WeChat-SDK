@@ -23,7 +23,8 @@ import java.util.List;
 @SuppressWarnings("PublicStaticCollectionField")
 @Data
 @Builder
-
+@NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.NONE)
 public class RawMessage implements Serializable {
@@ -412,8 +413,8 @@ public class RawMessage implements Serializable {
      * 菜单扫码结果
      */
     @Data
-
-    @lombok.Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     @XmlAccessorType(XmlAccessType.NONE)
     public static class ScanCodeInfo implements Serializable {
 

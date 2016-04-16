@@ -21,8 +21,14 @@ public class GetResult extends Result implements CompositeResult {
     private String fileName;
     private File file;
 
-    public String getFileName() {
-        return fileName;
+    @Override
+    public void setFile(File f) {
+        file = f;
+    }
+
+    @Override
+    public void setFileName(String name) {
+        fileName = name;
     }
 
     @Override
@@ -33,6 +39,11 @@ public class GetResult extends Result implements CompositeResult {
     @Override
     public MediaType toMediaType() {
         return MediaType.APPLICATION_JSON_TYPE;
+    }
+
+    @Override
+    public void setErrorCode(Integer errorCode) {
+        super.setErrorCode(errorCode);
     }
 
     public static GetResult from(Response response) {
