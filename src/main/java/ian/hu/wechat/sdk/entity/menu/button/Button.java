@@ -10,13 +10,16 @@ public abstract class Button extends AbstractButton {
     private static final long serialVersionUID = 2916012291360524910L;
 
     protected Button() {
-        type = defaultType();
+        //type = defaultType();
     }
 
     @JsonProperty("type")
     protected String type;
 
     public String getType() {
+        if (type == null) {
+            type = defaultType();
+        }
         return type;
     }
 

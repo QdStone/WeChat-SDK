@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode()
 public class CreatePersonalMenuResult extends CreateResult {
     private static final long serialVersionUID = 6317736134979773391L;
     @JsonProperty("menuid")

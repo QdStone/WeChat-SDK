@@ -5,7 +5,6 @@ import ian.hu.wechat.sdk.service.Errors;
 import ian.hu.wechat.sdk.service.core.result.Result;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

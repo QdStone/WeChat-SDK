@@ -53,7 +53,7 @@ public class LoggingFilter implements ContainerRequestFilter, ClientRequestFilte
     }
 
     @Override
-    public Object aroundReadFrom(ReaderInterceptorContext context) throws IOException, WebApplicationException {
+    public Object aroundReadFrom(ReaderInterceptorContext context) throws IOException {
         byte[] buffer = IOUtils.toByteArray(context.getInputStream());
         if (buffer.length < 3096) {
             logger.info("The contents of response body is: \n" + new String(buffer, "UTF-8") + "\n");
@@ -66,7 +66,7 @@ public class LoggingFilter implements ContainerRequestFilter, ClientRequestFilte
     }
 
     @Override
-    public void aroundWriteTo(WriterInterceptorContext context) throws IOException, WebApplicationException {
+    public void aroundWriteTo(WriterInterceptorContext context) throws IOException {
         OutputStreamWrapper wrapper = new OutputStreamWrapper(context.getOutputStream());
         context.setOutputStream(wrapper);
         context.proceed();

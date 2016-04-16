@@ -118,7 +118,7 @@ public final class WeChatUtils {
             // 获得最终的字节流, 未加密
             bytes = bos.toByteArray();
             bos.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
             // 不可能有异常除非内存不足
         }
 

@@ -95,7 +95,6 @@ public class AesEncryptResponse implements EncryptResponse {
             String raw = MashallerUtils.toXml(response);
             encrypt = WeChatUtils.encrypt(raw, aesKey, appId);
             msgSignature = WeChatUtils.getSHA1ForMessage(encrypt, token, nonce, timestamp);
-            nonce = nonce;
             timeStamp = timestamp;
             return this;
         } catch (Exception e) {

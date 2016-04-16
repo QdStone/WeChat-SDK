@@ -25,14 +25,14 @@ import java.util.List;
  * Tests for MediaService
  */
 public class MediaServiceTest {
-    static ResteasyClient client = new ResteasyClientBuilder().disableTrustManager().build();
-    static File file = new File(MediaServiceTest.class.getResource("/media/IMAG0047.jpg").getFile());
-    static File video = new File(MediaServiceTest.class.getResource("/media/1.mp4").getFile());
+    static final ResteasyClient client = new ResteasyClientBuilder().disableTrustManager().build();
+    static final File file = new File(MediaServiceTest.class.getResource("/media/IMAG0047.jpg").getFile());
+    static final File video = new File(MediaServiceTest.class.getResource("/media/1.mp4").getFile());
 
     static String imageMediaId;
     static String materialMediaId;
 
-    static MediaService service = ServiceHelper.getService(client, /*"http://weimob.tunnel.qydev.com/"*/null, MediaService.class);
+    static final MediaService service = ServiceHelper.getService(client, /*"http://weimob.tunnel.qydev.com/"*/null, MediaService.class);
 
     @BeforeClass
     public static void beforeClass() {

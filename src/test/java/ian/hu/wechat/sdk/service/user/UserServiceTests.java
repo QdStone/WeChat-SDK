@@ -22,8 +22,8 @@ import org.junit.Test;
  */
 public class UserServiceTests {
 
-    static ResteasyClient client = new ResteasyClientBuilder().disableTrustManager().build();
-    static UserService service = ServiceHelper.getService(client, /*"http://weimob.tunnel.qydev.com/"*/null, UserService.class);
+    static final ResteasyClient client = new ResteasyClientBuilder().disableTrustManager().build();
+    static final UserService service = ServiceHelper.getService(client, /*"http://weimob.tunnel.qydev.com/"*/null, UserService.class);
 
     @BeforeClass
     public static void beforeClass() {

@@ -3,6 +3,8 @@ package ian.hu.wechat.sdk.entity.menu.button;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 子菜单
@@ -20,8 +22,8 @@ public class SubButton extends AbstractButton {
         setName(name);
     }
 
-    public ArrayList<AbstractButton> getSubButtons() {
-        return subButtons;
+    public List<AbstractButton> getSubButtons() {
+        return Collections.unmodifiableList(subButtons);
     }
 
     public void setSubButtons(ArrayList<AbstractButton> subButtons) {

@@ -20,7 +20,7 @@ public class PageResult extends Result {
     @JsonProperty("total_count")
     private Integer totalCount;
     @JsonProperty("item")
-    private List<PageItem> items = new ArrayList<PageItem>();
+    private final List<PageItem> items = new ArrayList<PageItem>();
 
     @JsonProperty("item_count")
     public Integer getItemCount() {
