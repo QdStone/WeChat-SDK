@@ -15,7 +15,6 @@ import java.util.List;
  * 获取永久素材的结果
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

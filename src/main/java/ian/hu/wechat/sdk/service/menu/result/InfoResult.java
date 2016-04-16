@@ -16,7 +16,6 @@ import java.util.List;
  * 查询菜单信息的返回结果
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

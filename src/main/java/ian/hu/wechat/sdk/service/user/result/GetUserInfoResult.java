@@ -9,7 +9,6 @@ import lombok.*;
  * 获取用户信息结果
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

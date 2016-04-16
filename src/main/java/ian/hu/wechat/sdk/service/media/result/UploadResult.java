@@ -11,7 +11,6 @@ import javax.ws.rs.core.MediaType;
  * 上传图片获取链接的结果
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

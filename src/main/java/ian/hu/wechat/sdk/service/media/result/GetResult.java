@@ -13,7 +13,6 @@ import java.io.File;
  * @see #from(Response)
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

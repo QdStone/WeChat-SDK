@@ -6,7 +6,6 @@ import ian.hu.wechat.sdk.service.core.result.Result;
 import lombok.*;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

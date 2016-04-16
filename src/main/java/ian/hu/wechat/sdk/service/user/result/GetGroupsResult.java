@@ -11,7 +11,6 @@ import java.util.List;
  * 获取所有分组结果
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

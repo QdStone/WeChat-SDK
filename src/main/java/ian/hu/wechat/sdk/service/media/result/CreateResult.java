@@ -12,7 +12,6 @@ import javax.ws.rs.core.MediaType;
  * 创建临时素材的结果
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

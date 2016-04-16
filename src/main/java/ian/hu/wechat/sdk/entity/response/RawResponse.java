@@ -14,7 +14,6 @@ import java.util.Collections;
  * 对微信的原始回复
  */
 @Data
-
 @XmlRootElement(name = "xml")
 @XmlAccessorType(XmlAccessType.NONE)
 public class RawResponse implements Serializable {
@@ -93,7 +92,6 @@ public class RawResponse implements Serializable {
 
     @NoArgsConstructor
     @AllArgsConstructor
-    @lombok.Builder
     @XmlAccessorType(XmlAccessType.NONE)
     public static class MediaIdHolder implements Serializable {
         private static final long serialVersionUID = -8769121318036495411L;
@@ -102,8 +100,6 @@ public class RawResponse implements Serializable {
     }
 
     @Data
-
-    @lombok.Builder
     @AllArgsConstructor
     @NoArgsConstructor
     @EqualsAndHashCode(callSuper = true)
@@ -117,8 +113,6 @@ public class RawResponse implements Serializable {
     }
 
     @Data
-
-    @lombok.Builder
     @NoArgsConstructor
     @AllArgsConstructor
     @XmlAccessorType(XmlAccessType.NONE)
@@ -138,8 +132,6 @@ public class RawResponse implements Serializable {
     }
 
     @Data
-    @lombok.Builder
-
     @NoArgsConstructor
     @AllArgsConstructor
     @XmlAccessorType(XmlAccessType.NONE)

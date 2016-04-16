@@ -8,7 +8,7 @@ import lombok.*;
  * 获取用户所在分组
  */
 @Data
-@Builder
+//@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

@@ -11,7 +11,6 @@ import javax.ws.rs.core.MediaType;
  * 添加图文的结果
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

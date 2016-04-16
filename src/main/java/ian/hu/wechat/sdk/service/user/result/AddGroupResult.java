@@ -9,7 +9,6 @@ import lombok.*;
  * 新建分组结果
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
