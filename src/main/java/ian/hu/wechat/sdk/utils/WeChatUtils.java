@@ -37,7 +37,6 @@ import java.util.Map;
 
 /**
  * 包含微信加解密相关工具方法
- * Created by ian on 15/11/17.
  *
  * @see #getSHA1ForMessage(String, String, String, Long) 消息体签名
  * @see #getSHA1ForValidate(String, String, Long) url签名

@@ -25,7 +25,7 @@ public class Bootstrap {
             String accessTokenFilePath = System.getProperty("accessTokenFile") + "_" + appId;
             String accessToken;
             File file = new File(accessTokenFilePath);
-            if (!file.exists() || file.lastModified() < (new Date().getTime() - 7200000)) {
+            if (!file.exists() || file.lastModified() < new Date().getTime() - 7200000) {
                 AccessTokenService service = ServiceHelper.getService(AccessTokenService.class);
                 AccessTokenResult result = service.get(appId, appSecret, AccessTokenService.GRANT_TYPE_CLIENT_CREDENTIAL);
                 if (!Integer.valueOf(0).equals(result.getErrorCode())) {
@@ -43,9 +43,7 @@ public class Bootstrap {
             System.setProperty("accessToken", accessToken);
             Class.forName("ian.hu.wechat.sdk.TestConstants");
             System.out.println("Bootstrap finished");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
