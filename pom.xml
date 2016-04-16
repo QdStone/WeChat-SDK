@@ -16,7 +16,7 @@
         <jackson-databind.version>2.3.3</jackson-databind.version>
         <resteasy-client.version>3.0.7.Final</resteasy-client.version>
         <lombok.version>1.16.6</lombok.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <encoding>UTF-8</encoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
 
