@@ -54,4 +54,12 @@ public class Result implements Serializable {
     public Errors getError() {
         return Errors.getByCode(getErrorCode());
     }
+
+    /**
+     * 是否成功
+     * @return booelan
+     */
+    public boolean isOK() {
+        return getErrorCode() == Errors.OK.getCode();
+    }
 }
