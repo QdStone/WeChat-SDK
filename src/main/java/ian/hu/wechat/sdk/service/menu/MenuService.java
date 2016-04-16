@@ -3,10 +3,9 @@ package ian.hu.wechat.sdk.service.menu;
 import ian.hu.wechat.sdk.entity.menu.Menu;
 import ian.hu.wechat.sdk.entity.menu.PersonalMenu;
 import ian.hu.wechat.sdk.service.Service;
-import ian.hu.wechat.sdk.service.menu.result.CreateResult;
-import ian.hu.wechat.sdk.service.menu.result.DeleteResult;
-import ian.hu.wechat.sdk.service.menu.result.GetResult;
-import ian.hu.wechat.sdk.service.menu.result.InfoResult;
+import ian.hu.wechat.sdk.service.menu.param.MatchParam;
+import ian.hu.wechat.sdk.service.menu.param.MenuIdHolder;
+import ian.hu.wechat.sdk.service.menu.result.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -60,7 +59,17 @@ public interface MenuService extends Service {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("menu/create")
+    @Path("menu/addconditional")
     CreateResult createPersonalMenu(@QueryParam("access_token") String accessToken, PersonalMenu menu);
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("menu/delconditional")
+    DeleteResult deletePersonalMenu(@QueryParam("access_token") String accessToken, MenuIdHolder menuId);
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("menu/trymatch")
+    MatchResult tryMatch(@QueryParam("access_token") String accessToken, MatchParam userId);
 }
 
