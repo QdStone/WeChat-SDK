@@ -47,7 +47,7 @@ public final class MediaHelper {
      * @return 已添加描述的 {@link MultipartFormDataOutput}
      */
     public static MultipartFormDataOutput addVideoDescription(MultipartFormDataOutput output, String title, String introduction) {
-        Map<String, String> description = new HashMap<String, String>();
+        Map<String, String> description = new HashMap<>();
         description.put("title", title);
         description.put("introduction", introduction);
         output.addFormData("description", description, HashMap.class, TypeFactory.defaultInstance().constructMapType(HashMap.class, String.class, String.class), MediaType.APPLICATION_JSON_TYPE);

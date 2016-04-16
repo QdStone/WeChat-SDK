@@ -1,7 +1,7 @@
 package ian.hu.wechat.sdk.service;
 
 import ian.hu.wechat.sdk.debug.LoggingFilter;
-import ian.hu.wechat.sdk.rest.MultipartFormDataWriter;
+import ian.hu.wechat.sdk.rest.FixedMultipartFormDataWriter;
 import ian.hu.wechat.sdk.rest.annotation.OverrideMediaType;
 import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.lang.reflect.FieldUtils;
@@ -36,7 +36,7 @@ public final class ServiceHelper {
             client.register(LoggingFilter.class);
         }
 
-        client.register(MultipartFormDataWriter.class);
+        client.register(FixedMultipartFormDataWriter.class);
         if (baseUrl == null) {
             try {
                 baseUrl = FieldUtils.getDeclaredField(clazz, "DEFAULT_URL").get(clazz).toString();

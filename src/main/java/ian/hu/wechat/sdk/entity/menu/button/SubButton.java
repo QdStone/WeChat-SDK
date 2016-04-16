@@ -13,7 +13,7 @@ public class SubButton extends AbstractButton {
 
     private static final long serialVersionUID = 6910110003783707954L;
     @JsonProperty("sub_button")
-    protected ArrayList<AbstractButton> subButtons = new ArrayList<AbstractButton>();
+    protected List<AbstractButton> subButtons = new ArrayList<>();
 
     public SubButton() {
     }
@@ -26,7 +26,7 @@ public class SubButton extends AbstractButton {
         return Collections.unmodifiableList(subButtons);
     }
 
-    public void setSubButtons(ArrayList<AbstractButton> subButtons) {
+    public void setSubButtons(List<AbstractButton> subButtons) {
         this.subButtons = subButtons;
     }
 

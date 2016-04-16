@@ -12,7 +12,7 @@ import java.util.Locale;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode()
+@EqualsAndHashCode
 public class PersonalMenu extends Menu {
     private static final long serialVersionUID = -1142868039501135934L;
 

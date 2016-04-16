@@ -14,7 +14,7 @@ import java.util.List;
  * 获取菜单的返回结果
  */
 @Data
-@EqualsAndHashCode()
+@EqualsAndHashCode
 public class GetResult extends Result {
     private static final long serialVersionUID = 5776975408194272503L;
     @JsonProperty("menu")

@@ -15,7 +15,6 @@ import java.util.List;
  * 新增图文的参数
  */
 @Data
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

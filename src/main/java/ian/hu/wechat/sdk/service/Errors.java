@@ -24,7 +24,7 @@ public enum Errors {
     INVALID_IMAGE_FILE_SIZE(40009, "不合法的图片文件大小"),
     INVALID_VOICE_FILE_SIZE(40010, "不合法的语音文件大小");
 
-    private static final Map<Long, Errors> ERRORS_MAP = new HashMap<Long, Errors>();
+    private static final Map<Long, Errors> ERRORS_MAP = new HashMap<>();
     private final String msg;
     private final long code;
 
@@ -41,7 +41,7 @@ public enum Errors {
         return code;
     }
 
-    public static Errors get(long code) {
+    public static Errors getByCode(long code) {
         if (ERRORS_MAP.isEmpty()) {
             for (Errors e : Errors.values()) {
                 ERRORS_MAP.put(e.getCode(), e);

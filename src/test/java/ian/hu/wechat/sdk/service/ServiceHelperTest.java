@@ -12,7 +12,7 @@ import org.junit.Test;
 /**
  * Test for ServiceHelper
  */
-public class ServiceHelperTests {
+public class ServiceHelperTest {
 
     @BeforeClass
     public static void beforeClass() {
@@ -29,6 +29,6 @@ public class ServiceHelperTests {
         AccessTokenService service = ServiceHelper.getService(AccessTokenService.class);
         AccessTokenResult result = service.get(TestConstants.APP_ID, TestConstants.APP_SECRET, AccessTokenService.GRANT_TYPE_CLIENT_CREDENTIAL);
         System.out.println(result);
-        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
+        Assert.assertEquals(Errors.OK, result.getError());
     }
 }

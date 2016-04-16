@@ -21,5 +21,5 @@ import java.util.List;
 public class ContentHolder implements Serializable {
     private static final long serialVersionUID = 6412661055293050235L;
     @JsonProperty("news_item")
-    private List<NewsItem> newsItems = new ArrayList<NewsItem>();
+    private List<NewsItem> newsItems = new ArrayList<>();
 }

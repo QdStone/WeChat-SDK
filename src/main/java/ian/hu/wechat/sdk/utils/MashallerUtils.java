@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentMap;
  * 序列化为XML或者从XML反序列化
  */
 public final class MashallerUtils {
-    private static final ConcurrentMap<Class<?>, JAXBContext> jaxbContexts = new ConcurrentHashMap<Class<?>, JAXBContext>(64);
+    private static final ConcurrentMap<Class<?>, JAXBContext> jaxbContexts = new ConcurrentHashMap<>(64);
 
     private MashallerUtils() {
     }

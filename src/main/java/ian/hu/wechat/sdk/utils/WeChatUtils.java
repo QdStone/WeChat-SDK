@@ -176,7 +176,7 @@ public final class WeChatUtils {
     }
 
     private static byte[] decodePKCS7(byte... bytes) {
-        int pad = (int) bytes[bytes.length - 1];
+        int pad = bytes[bytes.length - 1];
         if (pad < 1 || pad > 32) {
             pad = 0;
         }
@@ -218,7 +218,7 @@ public final class WeChatUtils {
     }
 
     private static HashMap<String, Object> parse(NodeList nodeList) {
-        HashMap<String, Object> data = new HashMap<String, Object>();
+        HashMap<String, Object> data = new HashMap<>();
         boolean foundChild = false;
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
@@ -244,7 +244,7 @@ public final class WeChatUtils {
     public static String generateXml(HashMap<String, Object> data) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-        DocumentBuilder builder = null;
+        DocumentBuilder builder;
         try {
             builder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
@@ -257,7 +257,7 @@ public final class WeChatUtils {
         generateElement(root, data);
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = null;
+        Transformer transformer;
         try {
             transformer = transformerFactory.newTransformer();
         } catch (TransformerConfigurationException e) {

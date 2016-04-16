@@ -39,7 +39,7 @@ public class Menu implements Serializable {
      */
     @SuppressWarnings("FieldMayBeFinal")
     @JsonProperty("button")
-    private final List<AbstractButton> buttons = new ArrayList<AbstractButton>();
+    private final List<AbstractButton> buttons = new ArrayList<>();
     @JsonProperty("menuid")
     private Long menuId;
 

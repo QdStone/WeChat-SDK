@@ -17,7 +17,7 @@ public final class ResultHelper {
     public static <T extends CompositeResult> T from(Response response, Class<T> clazz) {
         T result;
         try {
-            result = clazz.newInstance();
+            result = clazz.getConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException(String.format("%s need a public constructor without parameter", clazz.getSimpleName()), e);
         }

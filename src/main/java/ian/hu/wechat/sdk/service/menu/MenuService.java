@@ -45,7 +45,7 @@ public interface MenuService extends Service {
      * @return 结果
      */
     @GET
-    @Path("menu/get")
+    @Path("menu/getByCode")
     GetResult get(@QueryParam("access_token") String accessToken);
 
     /**

@@ -17,7 +17,7 @@ public interface EncryptResponse extends Serializable {
     /**
      * 从RawResponse填充此对象
      *
-     * @param response
+     * @param response response
      * @param args     加密相关参数
      * @return 加密失败反回null
      */

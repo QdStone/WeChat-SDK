@@ -52,6 +52,6 @@ public class Result implements Serializable {
      * @see Errors
      */
     public Errors getError() {
-        return Errors.get(getErrorCode());
+        return Errors.getByCode(getErrorCode());
     }
 }

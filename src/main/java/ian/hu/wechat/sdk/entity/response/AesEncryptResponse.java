@@ -1,10 +1,7 @@
 package ian.hu.wechat.sdk.entity.response;
 
-import ian.hu.wechat.sdk.entity.message.AesEncryptMessage;
 import ian.hu.wechat.sdk.utils.MashallerUtils;
 import ian.hu.wechat.sdk.utils.WeChatUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class AesEncryptResponse implements EncryptResponse {
 
-    private static final Log logger = LogFactory.getLog(AesEncryptMessage.class);
+    private static final long serialVersionUID = 327205894803250977L;
 
     @XmlElement(name = "Encrypt")
     private String encrypt;
@@ -75,8 +72,8 @@ public class AesEncryptResponse implements EncryptResponse {
         try {
             String raw = WeChatUtils.decrypt(encrypt, aesKey);
             return MashallerUtils.fromXml(raw, RawResponse.class);
-        } catch (Exception e) {
-            logger.debug("decrypt failed", e);
+        } catch (Exception ignored) {
+            //logger.debug("decrypt failed", e);
             return null;
         }
     }
@@ -97,8 +94,8 @@ public class AesEncryptResponse implements EncryptResponse {
             msgSignature = WeChatUtils.getSHA1ForMessage(encrypt, token, nonce, timestamp);
             timeStamp = timestamp;
             return this;
-        } catch (Exception e) {
-            logger.debug("encrypt failed", e);
+        } catch (Exception ignored) {
+            //logger.debug("encrypt failed", e);
             return null;
         }
     }

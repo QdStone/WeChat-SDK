@@ -20,7 +20,7 @@ import org.junit.Test;
 /**
  * Tests for UserService
  */
-public class UserServiceTests {
+public class UserServiceTest {
 
     static final ResteasyClient client = new ResteasyClientBuilder().disableTrustManager().build();
     static final UserService service = ServiceHelper.getService(client, /*"http://weimob.tunnel.qydev.com/"*/null, UserService.class);

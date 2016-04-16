@@ -3,8 +3,6 @@ package ian.hu.wechat.sdk.entity.message;
 import ian.hu.wechat.sdk.utils.MashallerUtils;
 import ian.hu.wechat.sdk.utils.WeChatUtils;
 import lombok.Data;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,7 +18,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class AesEncryptMessage implements EncryptMessage {
 
-    private static final Log logger = LogFactory.getLog(AesEncryptMessage.class);
     private static final long serialVersionUID = -5017628769715365670L;
 
     @XmlElement(name = "ToUserName")
@@ -36,8 +33,8 @@ public class AesEncryptMessage implements EncryptMessage {
             String raw = MashallerUtils.toXml(message);
             String aes = WeChatUtils.encrypt(raw, aesKey, appId);
             msg.setEncrypt(aes);
-        } catch (Exception e) {
-            logger.debug("encrypt failed", e);
+        } catch (Exception ignored) {
+            //logger.debug("encrypt failed", e);
             return null;
         }
         return msg;
@@ -47,8 +44,8 @@ public class AesEncryptMessage implements EncryptMessage {
         try {
             String raw = WeChatUtils.decrypt(encrypt, aesKey);
             return MashallerUtils.fromXml(raw, RawMessage.class);
-        } catch (Exception e) {
-            logger.debug("decrypt failed", e);
+        } catch (Exception ignored) {
+            //logger.debug("decrypt failed", e);
             return null;
         }
 

@@ -465,7 +465,7 @@ public class RawMessage implements Serializable {
             private static final long serialVersionUID = 8142061826482976073L;
             @SuppressWarnings("FieldMayBeFinal")
             @XmlElement(name = "item")
-            private List<Item> items = new ArrayList<Item>();
+            private List<Item> items = new ArrayList<>();
 
             @Data
             @lombok.Builder

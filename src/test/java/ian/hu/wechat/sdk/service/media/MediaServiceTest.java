@@ -44,7 +44,7 @@ public class MediaServiceTest {
         MultipartFormDataOutput output = MediaHelper.fromFile(file, null);
         CreateResult result = service.create(TestConstants.ACCESS_TOKEN, "image", output);
         System.out.println(result);
-        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
+        Assert.assertEquals(Errors.OK, result.getError());
         imageMediaId = result.getMedia().getMediaId();
     }
 
@@ -59,7 +59,7 @@ public class MediaServiceTest {
         MultipartFormDataOutput output = MediaHelper.fromFile(file, "media");
         UploadResult result = service.uploadImage(TestConstants.ACCESS_TOKEN, output);
         System.out.println(result);
-        Assert.assertEquals(result.getErrorCode().intValue(), 0);
+        Assert.assertEquals(0, result.getErrorCode().intValue());
     }
 
     @Test
@@ -75,7 +75,7 @@ public class MediaServiceTest {
         AddMaterialResult result = service.addMaterial(TestConstants.ACCESS_TOKEN, "image", MediaHelper.fromFile(file, null));
         Assert.assertEquals(Errors.OK, result.getError());
         AddNewsParam param = new AddNewsParam();
-        List<NewsItem> news = new ArrayList<NewsItem>();
+        List<NewsItem> news = new ArrayList<>();
         NewsItem item = new NewsItem();
         item.setTitle("TestNews");
         item.setContent("Test Content with string");
@@ -87,7 +87,7 @@ public class MediaServiceTest {
         param.setNews(news);
         AddNewsResult result1 = service.addNews(TestConstants.ACCESS_TOKEN, param);
         System.out.println(result1);
-        Assert.assertTrue(result1.getErrorCode().equals(0) || result1.getErrorCode().equals(45009));
+        Assert.assertTrue(result1.getError() == Errors.OK || result1.getError() == Errors.getByCode(45009));
         materialMediaId = result1.getMediaId();
     }
 
@@ -95,20 +95,20 @@ public class MediaServiceTest {
     public void test_count() {
         CountResult result = service.getCount(TestConstants.ACCESS_TOKEN);
         System.out.println(result);
-        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
+        Assert.assertEquals(Errors.OK, result.getError());
     }
 
     @Test
     public void test_getPage() {
         PageResult result = service.getPage(TestConstants.ACCESS_TOKEN, new PageParam("news", 0, 3));
         System.out.println(result);
-        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
+        Assert.assertEquals(Errors.OK, result.getError());
     }
 
     @Test
     public void test_getMaterial() {
         GetMaterialResult result = GetMaterialResult.from(service.getMaterial(TestConstants.ACCESS_TOKEN, new MediaIdHolder(materialMediaId)));
         System.out.println(result);
-        Assert.assertEquals(Integer.valueOf(0), result.getErrorCode());
+        Assert.assertEquals(Errors.OK, result.getError());
     }
 }

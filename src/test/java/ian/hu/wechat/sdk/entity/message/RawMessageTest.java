@@ -78,7 +78,7 @@ public class RawMessageTest {
 
         RawMessage msg = MashallerUtils.fromXml(xml, RawMessage.class);
         Assert.assertTrue(msg.isEvent() && RawMessage.EVENT_MENU_SCANCODE_PUSH.equals(msg.getEvent()));
-        Assert.assertEquals(msg.getScanCodeInfo().getScanResult(), "1");
+        Assert.assertEquals("1", msg.getScanCodeInfo().getScanResult());
     }
 
 }
