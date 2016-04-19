@@ -12,9 +12,7 @@
         <commons-codec.version>1.6</commons-codec.version>
         <commons-lang.version>2.5</commons-lang.version>
         <commons-logging.version>1.1.1</commons-logging.version>
-        <jackson-annotations.version>2.3.2</jackson-annotations.version>
-        <jackson-databind.version>2.3.3</jackson-databind.version>
-        <resteasy-client.version>3.0.7.Final</resteasy-client.version>
+        <resteasy-client.version>3.0.16.Final</resteasy-client.version>
         <lombok.version>1.16.8</lombok.version>
         <encoding>UTF-8</encoding>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -47,16 +45,6 @@
             <version>${commons-logging.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson-annotations.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson-databind.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
             <version>${resteasy-client.version}</version>
@@ -81,6 +69,13 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>tjws</artifactId>
+            <version>${resteasy-client.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
