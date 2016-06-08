@@ -1,0 +1,118 @@
+buildscript {
+    repositories {
+        maven { url "https://repo.spring.io/plugins-release" }
+    }
+    dependencies {
+        classpath("org.gradle.api.plugins:gradle-tomcat-plugin:1.2.3")
+        classpath("org.springframework.build.gradle:propdeps-plugin:0.0.7")
+        classpath("io.spring.gradle:spring-io-plugin:0.0.4.RELEASE")
+        classpath('me.champeau.gradle:gradle-javadoc-hotfix-plugin:0.1')
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.2'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
+    }
+}
+
+plugins {
+    id "org.sonarqube" version "1.2"
+}
+
+group = 'ian.hu.wechat'
+
+ext.IDE_GRADLE = "$rootDir/gradle/ide.gradle"
+ext.JAVA_GRADLE = "$rootDir/gradle/java.gradle"
+ext.SPRING3_GRADLE = "$rootDir/gradle/spring3.gradle"
+ext.MAVEN_GRADLE = "$rootDir/gradle/publish-maven.gradle"
+ext.SAMPLE_GRADLE = "$rootDir/gradle/sample.gradle"
+ext.TOMCAT_GRADLE = "$rootDir/gradle/tomcat.gradle"
+ext.TOMCAT_6_GRADLE = "$rootDir/gradle/tomcat6.gradle"
+ext.TOMCAT_7_GRADLE = "$rootDir/gradle/tomcat7.gradle"
+
+ext.releaseBuild = version.endsWith('RELEASE')
+ext.snapshotBuild = version.endsWith('SNAPSHOT')
+ext.milestoneBuild = !(releaseBuild || snapshotBuild)
+
+apply plugin: 'base'
+
+apply from: JAVA_GRADLE
+apply from: SPRING3_GRADLE
+apply from: MAVEN_GRADLE
+
+
+description = "WeChat SDK"
+
+project.conf2ScopeMappings.addMapping(MavenPlugin.TEST_COMPILE_PRIORITY + 1, project.configurations.getByName("integrationTestCompile"), Conf2ScopeMappingContainer.TEST)
+project.conf2ScopeMappings.addMapping(MavenPlugin.TEST_COMPILE_PRIORITY + 2, project.configurations.getByName("integrationTestRuntime"), Conf2ScopeMappingContainer.TEST)
+check.dependsOn integrationTest
+
+configurations {
+    jacoco //Configuration Group used by Sonar to provide Code Coverage using JaCoCo
+}
+
+dependencies {
+    compile "org.projectlombok:lombok:${lombokVersion}"
+
+    compile "org.jboss.resteasy:resteasy-client:${resteasyClientVersion}"
+    compile "org.jboss.resteasy:resteasy-jackson2-provider:${resteasyClientVersion}"
+    compile "org.jboss.resteasy:resteasy-multipart-provider:${resteasyClientVersion}"
+    compile "commons-lang:commons-lang:${commonsLangVersion}"
+
+    testCompile "org.jboss.resteasy:tjws:${resteasyClientVersion}"
+    testCompile "junit:junit:${junitVersion}"
+}
+
+/*
+ *
+ *  * Copyright 2014-2016 the original author or authors.
+ *  *
+ *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * you may not use this file except in compliance with the License.
+ *  * You may obtain a copy of the License at
+ *  *
+ *  *      http://www.apache.org/licenses/LICENSE-2.0
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ */
+
+/*
+sonarqube {
+    properties {
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.projectName", "Spring Session"
+        property "sonar.jacoco.reportPath", "${buildDir.name}/jacoco.exec"
+        property "sonar.links.homepage", 'https://github.com/spring-projects/spring-session'
+        property "sonar.links.ci", 'https://build.spring.io/browse/SESSION'
+        property "sonar.links.issue", 'https://github.com/spring-projects/spring-session/issues'
+        property "sonar.links.scm", 'https://github.com/spring-projects/spring-session'
+        property "sonar.links.scm_dev", 'https://github.com/spring-projects/spring-session.git'
+        property "sonar.java.coveragePlugin", "jacoco"
+    }
+}*/
+
+/*
+task configDocsZip(dependsOn: [':docs:asciidoctor',':spring-session:javadoc']) << {
+    project.tasks.docsZip.from(project(':docs').asciidoctor) {
+        into('reference')
+    }
+    project.tasks.docsZip.from(project(':spring-session').javadoc) {
+        into('api')
+    }
+}*/
+
+/*
+task docsZip(type: Zip, dependsOn: 'configDocsZip') {
+    group = "Distribution"
+    baseName = "spring-session"
+    classifier = "docs"
+    description = "Builds -${classifier} archive containing api and reference " +
+            "for deployment."
+}
+
+artifacts {
+    archives docsZip
+}
+*/
