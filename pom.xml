@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <groupId>ian.hu.wechat</groupId>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wechat-sdk</artifactId>
     <version>1.0.0-RELEASE</version>
-
     <properties>
         <junit.version>4.12</junit.version>
         <commons-codec.version>1.6</commons-codec.version>
         <commons-lang.version>2.5</commons-lang.version>
         <commons-logging.version>1.1.1</commons-logging.version>
-        <jackson-annotations.version>2.3.2</jackson-annotations.version>
-        <jackson-databind.version>2.3.3</jackson-databind.version>
         <resteasy-client.version>3.0.7.Final</resteasy-client.version>
         <lombok.version>1.16.6</lombok.version>
         <encoding>UTF-8</encoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-
         <log4j.version>1.2.16</log4j.version>
     </properties>
-
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -72,7 +64,6 @@
             <version>${lombok.version}</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -118,4 +109,13 @@
             </plugin>
         </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.6</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
