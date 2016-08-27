@@ -36,7 +36,11 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.ByteArrayOutputStream;
@@ -121,10 +125,10 @@ public final class WeChatUtils {
         byte[] textBytes = text.getBytes(CHARSET);
         byte[] networkOrderBytes = getNetworkBytesOrder(textBytes.length);
         byte[] appidBytes = appId.getBytes(CHARSET);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte[] bytes = null;
         try {
             // randomStr + networkBytesOrder + text + appid
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
             bos.write(randomBytes);
             bos.write(networkOrderBytes);
             bos.write(textBytes);
@@ -227,11 +231,7 @@ public final class WeChatUtils {
             Document doc = builder.parse(new InputSource(new StringReader(xml)));
             // 解析
             return parse(doc.getDocumentElement().getChildNodes());
-        } catch (ParserConfigurationException e) {
-            log.error(e);
-        } catch (SAXException e) {
-            log.error(e);
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             log.error(e);
         }
         return null;
@@ -251,7 +251,11 @@ public final class WeChatUtils {
                     // 进一步parse
                     childData = parse(child.getChildNodes());
                 }
-                data.put(child.getTagName(), childData == null ? child.getTextContent() : childData);
+                if (childData == null) {
+                    data.put(child.getTagName(), child.getTextContent());
+                } else {
+                    data.put(child.getTagName(), childData);
+                }
             }
         }
         // 无子节点
@@ -308,13 +312,14 @@ public final class WeChatUtils {
 
     }
 
+    @SuppressWarnings("unchecked")
     private static void generateElement(Element parent, Map<String, Object> data) {
         Document doc = parent.getOwnerDocument();
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             Element element = doc.createElement(entry.getKey());
             parent.appendChild(element);
             Object value = entry.getValue();
-            if (value instanceof HashMap) {
+            if (value instanceof Map) {
                 //noinspection unchecked
                 generateElement(element, (Map<String, Object>) value);
             } else {

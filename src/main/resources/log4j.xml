@@ -51,7 +51,7 @@
         <level value="DEBUG"/>
         <appender-ref ref="CONSOLE"/>
     </category>
-    <category name="ian.hu.wechat.sdk.service.ServiceHelper" additivity="false">
+    <category name="ian.hu.wechat.sdk.service.media.MediaService" additivity="false">
         <level value="DEBUG"/>
         <appender-ref ref="CONSOLE"/>
     </category>
