@@ -80,9 +80,9 @@ public final class MashallerUtils {
      * @return The instance of T from xml
      * @throws RuntimeException
      */
+    @SuppressWarnings("unchecked")
     public static <T> T fromXml(String xml, Class<T> clazz) {
         try {
-            //noinspection unchecked
             return (T) getUnmarshaller(clazz).unmarshal(new StringReader(xml));
         } catch (JAXBException e) {
             throw new RuntimeException(e);

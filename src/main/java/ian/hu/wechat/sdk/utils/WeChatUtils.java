@@ -231,7 +231,11 @@ public final class WeChatUtils {
             Document doc = builder.parse(new InputSource(new StringReader(xml)));
             // 解析
             return parse(doc.getDocumentElement().getChildNodes());
-        } catch (ParserConfigurationException | IOException | SAXException e) {
+        } catch (ParserConfigurationException e) {
+            log.error(e);
+        } catch (IOException e) {
+            log.error(e);
+        } catch (SAXException e) {
             log.error(e);
         }
         return null;
